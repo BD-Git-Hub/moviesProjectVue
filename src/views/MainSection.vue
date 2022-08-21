@@ -22,9 +22,13 @@ export default {
     components: {
         TheTrailersSection
     },
-    setup() {
+    data() {
+      return {
+
+      }
         
     },
+   
 }
 </script>
 

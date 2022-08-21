@@ -13,7 +13,7 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# Editor directories and files
+# Editor directories and files - add files here to git ignore.
 .idea
 .vscode
 *.suo
@@ -21,3 +21,5 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+src/APIKeys.txt
+src/fetch/APIKeys.js
