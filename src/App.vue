@@ -16,29 +16,22 @@ export default {
   mounted() {
     const dataRetrieval = async () => {
       const data = await getData();
+      console.log(data[0].results);
 
-      console.log(data);
+      let movies = [];
+      
 
-      let dataItems = [];
-      dataItems.push(data[0].items);
+      
 
-      dataItems[0].forEach((dataItems) => {
-        this.fetchedData.push({
-          id: dataItems.id,
-          title: dataItems.title,
-          releaseDate: dataItems.releaseState,
-          image: dataItems.image,
-        });
-      });
+      
+
+
+      
 
 
 
     };
     dataRetrieval();
-    // this.randomFilmNumber()
-    // const randomNumber = this.randomFilmNumber();
-    // console.log(randomNumber)
-    // console.log(this.fetchedData);
   },
   methods: {
     randomFilmNumber() {

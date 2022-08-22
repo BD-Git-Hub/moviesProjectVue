@@ -8,28 +8,26 @@
         <button class="moviesBtn">Find out more.</button>
       </div>
     </div>
-    <the-trailers-section/>
-    
+    <the-carousel title="Trailers"/>
+    <the-carousel title="Genres"/>
+    <the-carousel title="Ratings"/>
+    <the-footer/>
   </div>
 </template>
 
-
 <script>
-
-import TheTrailersSection from '../components/layouts/TheTrailersSection.vue'
+import TheCarousel from "../components/layouts/TheCarousel.vue";
+import TheFooter from '../components/layouts/TheFooter.vue';
 
 export default {
-    components: {
-        TheTrailersSection
-    },
-    data() {
-      return {
-
-      }
-        
-    },
-   
-}
+  components: {
+    TheCarousel,
+    TheFooter,
+  },
+  data() {
+    return {};
+  },
+};
 </script>
 
 <style scoped>
