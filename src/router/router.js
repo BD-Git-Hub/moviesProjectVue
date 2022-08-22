@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
-import NavLogin from "../views/navigation/NavLogin.vue";
-import NavRatings from "../views/navigation/NavRatings.vue";
-import NavTrailers from "../views/navigation/NavTrailers.vue";
-import NavWatchlist from "../views/navigation/NavWatchlist.vue";
-import MainSection from '../views/MainSection.vue'
+import NavLogin from "../views/navigation/LoginView.vue";
+import NavRatings from "../views/navigation/RatingsView.vue";
+import NavTrailers from "../views/navigation/TrailersView.vue";
+import NavWatchlist from "../views/navigation/WatchlistView.vue";
+import MainSection from "../views/MainSection.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -11,7 +11,7 @@ const router = createRouter({
     {
       path: "/login",
       component: NavLogin,
-    },
+    },  
     {
       path: "/ratings",
       component: NavRatings,
@@ -27,7 +27,11 @@ const router = createRouter({
     {
       path: "/home",
       component: MainSection,
-    }, 
+    },
+    {
+      path: "/",
+      redirect: "/home",
+    },
   ],
 });
 

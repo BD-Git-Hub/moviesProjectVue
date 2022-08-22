@@ -2,8 +2,8 @@
   <div>
     <the-navigation-bar> </the-navigation-bar>
     <router-view />
-    <p v-if="fetchedData">{{ fetchedData }}</p>
-    <p v-else>No Data</p>
+    <!-- <p v-if="fetchedData">{{ fetchedData }}</p>
+    <p v-else>No Data</p> -->
   </div>
 </template>
 
@@ -16,14 +16,35 @@ export default {
   mounted() {
     const dataRetrieval = async () => {
       const data = await getData();
-       this.fetchedData.push(data)
-       console.log(this.fetchedData)
+
+      console.log(data);
+
+      let dataItems = [];
+      dataItems.push(data[0].items);
+
+      dataItems[0].forEach((dataItems) => {
+        this.fetchedData.push({
+          id: dataItems.id,
+          title: dataItems.title,
+          releaseDate: dataItems.releaseState,
+          image: dataItems.image,
+        });
+      });
+
+
+
     };
     dataRetrieval();
-
-    // const data = getData();
-    // console.log('data received')
-    // console.log(data);
+    // this.randomFilmNumber()
+    // const randomNumber = this.randomFilmNumber();
+    // console.log(randomNumber)
+    // console.log(this.fetchedData);
+  },
+  methods: {
+    randomFilmNumber() {
+      const randomNumber = Math.floor(Math.random() * 100);
+      return randomNumber;
+    },
   },
   data() {
     return {
