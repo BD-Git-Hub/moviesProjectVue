@@ -23,46 +23,46 @@ const dataRetrieval = async (searchParams) => {
 };
 
 const requestData = async (searchParams, userParams) => {
-  const data = await searchData(APIURL + searchParams,  userParams);
-      return data;
+  const data = await searchData(APIURL + searchParams, userParams);
+  return data;
+};
+
+const convertDataToStoredData = (data, storedData) => {
+  data.then((response) => {
+    let dataArr = [];
+
+    if (response[0]) {
+      dataArr.push(response[0]);
+    } else if (response[0].results) {
+      dataArr.push(response[0]);
+    }
+
+    if (dataArr[0].results) {
+      dataArr[0].results.forEach((dataItem) => {
+        storedData.push({
+          name: dataItem.original_title || dataItem.name,
+          id: dataItem.id,
+          description: dataItem.overview,
+          posterURL: url + dataItem.poster_path,
+          voteAverage: dataItem.vote_average,
+          voteCount: dataItem.vote_count,
+          releaseDate: dataItem.release_date,
+        });
+      });
+    }
+    if (dataArr[0].genres) {
+      dataArr[0].genres.forEach((genreItem) => {
+        storedData.push({
+          id: genreItem.id,
+          name: genreItem.name,
+        });
+      });
+    }
+  });
 };
 export default {
   components: { TheNavigationBar },
   mounted() {
-    const convertDataToStoredData = (data, storedData) => {
-      data.then((response) => {
-        let dataArr = [];
-
-        if (response[0]) {
-          dataArr.push(response[0]);
-        } else if (response[0].results) {
-          dataArr.push(response[0]);
-        }
-
-        if (dataArr[0].results) {
-          dataArr[0].results.forEach((dataItem) => {
-            storedData.push({
-              name: dataItem.original_title || dataItem.name,
-              id: dataItem.id,
-              description: dataItem.overview,
-              posterURL: url + dataItem.poster_path,
-              voteAverage: dataItem.vote_average,
-              voteCount: dataItem.vote_count,
-              releaseDate: dataItem.release_date,
-            });
-          });
-        }
-        if (dataArr[0].genres) {
-          dataArr[0].genres.forEach((genreItem) => {
-            storedData.push({
-              id: genreItem.id,
-              name: genreItem.name,
-            });
-          });
-        }
-      });
-    };
-
     const trailersData = dataRetrieval(upcomingMovie);
     const genreData = dataRetrieval(genreList);
     const ratingsData = dataRetrieval(topRated);
@@ -79,6 +79,7 @@ export default {
       genresData: this.genresData,
       ratingsData: this.ratingsData,
       trendingDayData: this.trendingDayData,
+      searchData: this.searchData,
     };
   },
   methods: {
@@ -87,12 +88,10 @@ export default {
       return randomNumber;
     },
     searchSubmitted(selectedGenre, selectedRating, userInput) {
-      console.log(selectedGenre, selectedRating, userInput);
-
       const queryUserInput = "&query=" + userInput;
 
       const searchData = requestData(searchMovie, queryUserInput);
-      console.log(searchData)
+      convertDataToStoredData(searchData, this.searchData);
     },
   },
 
@@ -102,6 +101,7 @@ export default {
       genresData: [],
       ratingsData: [],
       trendingDayData: [],
+      searchData: [],
     };
   },
 };

@@ -1,11 +1,13 @@
 <template>
   <div>
     <div class="mainSection">
-      <div class="moviesInfoGroup">
+      
+      <the-main-section-items v-for="data in searchedData" :key="data.id" :name="data.name" :description="data.description" :releaseDate="data.releaseDate" :voteAverage="data.voteAverage" :posterURL="data.posterURL" :id="data.id"/>
+      <!-- <div class="moviesInfoGroup">
         <p class="moviesTitle">{{ trendingDayData}}</p>
-        <!-- <p class="moviesRating">{{trendingDayData[0].voteAverage}}</p>  -->
+         <p class="moviesRating">Rating</p> 
         <button class="moviesBtn">Find out more.</button>
-      </div>
+      </div> -->
     </div>
     <the-genres title="Genres" />
     <the-trailers title="Trailers" />
@@ -19,33 +21,33 @@ import TheTrailers from "../components/layouts/TheTrailers.vue";
 import TheFooter from "../components/layouts/TheFooter.vue";
 import TheGenres from "@/components/layouts/TheGenres.vue";
 import TheRatings from "@/components/layouts/TheRatings.vue";
-
+import TheMainSectionItems from "@/components/layouts/TheMainSectionItems.vue";
 
 export default {
-  inject: ["trendingDayData"],
+  inject: ["trendingDayData", "searchData"],
   components: {
     TheTrailers,
     TheFooter,
     TheGenres,
     TheRatings,
-  }, methods: {
+    TheMainSectionItems
+},
+
+ updated() {
+      
+      console.log(this.searchedData)
+  },
+  methods: {
     randomFilmNumber() {
       const randomNumber = Math.floor(Math.random() * 20);
       return randomNumber;
     },
-
-  },
-  mounted() {
-
-
-    
-
-  },
+  }, 
+  
 
   data() {
     return {
-      
-
+      searchedData: this.searchData
     };
   },
 };
@@ -54,7 +56,9 @@ export default {
 <style scoped>
 .mainSection {
   background: blue;
-  height: 92vh;
+  height: 100%;
+  width: 100%;
+  display: inline-block;
 }
 
 .moviesInfoGroup {
@@ -75,8 +79,6 @@ export default {
   font-size: 1.3rem;
   margin: 0.5rem;
 }
-
-
 
 .moviesBtn {
   font-size: 2rem;
