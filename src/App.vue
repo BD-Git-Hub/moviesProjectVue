@@ -1,47 +1,107 @@
 <template>
   <div>
-    <the-navigation-bar> </the-navigation-bar>
+    <the-navigation-bar @searchSubmitted="searchSubmitted">
+    </the-navigation-bar>
     <router-view />
-    <!-- <p v-if="fetchedData">{{ fetchedData }}</p>
-    <p v-else>No Data</p> -->
   </div>
 </template>
 
 <script>
 import TheNavigationBar from "./components/layouts/TheNavigationBar.vue";
-import { getData } from "./fetch/fetchAPI";
+import { getData, searchData } from "./fetch/fetchAPI";
+const APIURL = `https://api.themoviedb.org/3/`;
+const url = "https://image.tmdb.org/t/p/w500";
+const upcomingMovie = "movie/upcoming";
+const genreList = "genre/movie/list";
+const topRated = "movie/top_rated";
+const trendingForDay = "trending/all/day";
+const searchMovie = "search/movie";
 
+const dataRetrieval = async (searchParams) => {
+  const data = await getData(APIURL + searchParams);
+  return data;
+};
+
+const requestData = async (searchParams, userParams) => {
+  const data = await searchData(APIURL + searchParams,  userParams);
+      return data;
+};
 export default {
   components: { TheNavigationBar },
   mounted() {
-    const dataRetrieval = async () => {
-      const data = await getData();
-      console.log(data[0].results);
+    const convertDataToStoredData = (data, storedData) => {
+      data.then((response) => {
+        let dataArr = [];
 
-      let movies = [];
-      
+        if (response[0]) {
+          dataArr.push(response[0]);
+        } else if (response[0].results) {
+          dataArr.push(response[0]);
+        }
 
-      
-
-      
-
-
-      
-
-
-
+        if (dataArr[0].results) {
+          dataArr[0].results.forEach((dataItem) => {
+            storedData.push({
+              name: dataItem.original_title || dataItem.name,
+              id: dataItem.id,
+              description: dataItem.overview,
+              posterURL: url + dataItem.poster_path,
+              voteAverage: dataItem.vote_average,
+              voteCount: dataItem.vote_count,
+              releaseDate: dataItem.release_date,
+            });
+          });
+        }
+        if (dataArr[0].genres) {
+          dataArr[0].genres.forEach((genreItem) => {
+            storedData.push({
+              id: genreItem.id,
+              name: genreItem.name,
+            });
+          });
+        }
+      });
     };
-    dataRetrieval();
+
+    const trailersData = dataRetrieval(upcomingMovie);
+    const genreData = dataRetrieval(genreList);
+    const ratingsData = dataRetrieval(topRated);
+    const trendingDayData = dataRetrieval(trendingForDay);
+
+    convertDataToStoredData(trailersData, this.trailersData);
+    convertDataToStoredData(genreData, this.genresData);
+    convertDataToStoredData(ratingsData, this.ratingsData);
+    convertDataToStoredData(trendingDayData, this.trendingDayData);
+  },
+  provide() {
+    return {
+      trailerData: this.trailersData,
+      genresData: this.genresData,
+      ratingsData: this.ratingsData,
+      trendingDayData: this.trendingDayData,
+    };
   },
   methods: {
     randomFilmNumber() {
-      const randomNumber = Math.floor(Math.random() * 100);
+      const randomNumber = Math.floor(Math.random() * 20);
       return randomNumber;
     },
+    searchSubmitted(selectedGenre, selectedRating, userInput) {
+      console.log(selectedGenre, selectedRating, userInput);
+
+      const queryUserInput = "&query=" + userInput;
+
+      const searchData = requestData(searchMovie, queryUserInput);
+      console.log(searchData)
+    },
   },
+
   data() {
     return {
-      fetchedData: [],
+      trailersData: [],
+      genresData: [],
+      ratingsData: [],
+      trendingDayData: [],
     };
   },
 };

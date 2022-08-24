@@ -2,30 +2,51 @@
   <div>
     <div class="mainSection">
       <div class="moviesInfoGroup">
-        <p class="moviesTitle">Title</p>
-        <p class="moviesRating">rating</p>
-        <p class="moviesDes">Description</p>
+        <p class="moviesTitle">{{ trendingDayData}}</p>
+        <!-- <p class="moviesRating">{{trendingDayData[0].voteAverage}}</p>  -->
         <button class="moviesBtn">Find out more.</button>
       </div>
     </div>
-    <the-carousel title="Trailers"/>
-    <the-carousel title="Genres"/>
-    <the-carousel title="Ratings"/>
-    <the-footer/>
+    <the-genres title="Genres" />
+    <the-trailers title="Trailers" />
+    <the-ratings title="Ratings" />
+    <the-footer />
   </div>
 </template>
 
 <script>
-import TheCarousel from "../components/layouts/TheCarousel.vue";
-import TheFooter from '../components/layouts/TheFooter.vue';
+import TheTrailers from "../components/layouts/TheTrailers.vue";
+import TheFooter from "../components/layouts/TheFooter.vue";
+import TheGenres from "@/components/layouts/TheGenres.vue";
+import TheRatings from "@/components/layouts/TheRatings.vue";
+
 
 export default {
+  inject: ["trendingDayData"],
   components: {
-    TheCarousel,
+    TheTrailers,
     TheFooter,
+    TheGenres,
+    TheRatings,
+  }, methods: {
+    randomFilmNumber() {
+      const randomNumber = Math.floor(Math.random() * 20);
+      return randomNumber;
+    },
+
   },
+  mounted() {
+
+
+    
+
+  },
+
   data() {
-    return {};
+    return {
+      
+
+    };
   },
 };
 </script>
@@ -33,7 +54,7 @@ export default {
 <style scoped>
 .mainSection {
   background: blue;
-  height: 100vh;
+  height: 92vh;
 }
 
 .moviesInfoGroup {
@@ -47,18 +68,15 @@ export default {
 }
 
 .moviesTitle {
-  font-size: 5rem;
+  font-size: 1.5rem;
 }
 
 .moviesRating {
-  font-size: 3rem;
+  font-size: 1.3rem;
   margin: 0.5rem;
 }
 
-.moviesDes {
-  font-size: 2rem;
-  margin: 0.5rem;
-}
+
 
 .moviesBtn {
   font-size: 2rem;
