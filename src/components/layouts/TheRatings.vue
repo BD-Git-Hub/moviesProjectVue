@@ -16,11 +16,10 @@
     >
      
 
-
       <vueper-slide
         v-for="data in ratingsData"
         :key="data.id"
-        :title="data.name"
+        
         class="vueper-slide"
         :image="data.posterURL"
         :content="data.voteAverage.toString()"

@@ -1,5 +1,5 @@
 <template>
-  <div class="trailerSection">
+  <div class="genreSection">
     <h1>{{ title }}</h1>
     <vueper-slides
       class="no-shadow"
@@ -123,7 +123,7 @@ export default {
 h1 {
   padding: 1rem;
 }
-.trailerSection {
+.genreSection {
   height: 25rem;
   background-color: pink;
 }

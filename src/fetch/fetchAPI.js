@@ -7,13 +7,16 @@ export const getData = async (APIURL) => {
   
   await fetch(`${APIURL}${APIKey}`)
     .then((response) => {
+      
       if (response.ok) {
+
         return response.json();
       } else {
         throw new Error(`An Error has occurred ${response.status}`);
       }
     })
     .then((data) => {
+
       movies.push(data);
     })
     .catch((error) => {
@@ -39,6 +42,7 @@ export const searchData = async (APIURL, userParams) => {
       }
     })
     .then((data) => {
+
       movies.push(data);
     })
     .catch((error) => {

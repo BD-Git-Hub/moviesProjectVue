@@ -73,6 +73,7 @@ export default {
     convertDataToStoredData(ratingsData, this.ratingsData);
     convertDataToStoredData(trendingDayData, this.trendingDayData);
   },
+  watch: {},
   provide() {
     return {
       trailerData: this.trailersData,
@@ -89,10 +90,14 @@ export default {
     },
     searchSubmitted(selectedGenre, selectedRating, userInput) {
       const queryUserInput = "&query=" + userInput;
-
       const searchData = requestData(searchMovie, queryUserInput);
+      const ratingNumber = selectedRating;
+      console.log(ratingNumber)
+
+
       convertDataToStoredData(searchData, this.searchData);
     },
+   
   },
 
   data() {

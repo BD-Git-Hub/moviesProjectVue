@@ -35,7 +35,6 @@ export default {
 
  updated() {
       
-      console.log(this.searchedData)
   },
   methods: {
     randomFilmNumber() {
@@ -56,9 +55,10 @@ export default {
 <style scoped>
 .mainSection {
   background: blue;
+  min-height: 92vh;
   height: 100%;
   width: 100%;
-  display: inline-block;
+  
 }
 
 .moviesInfoGroup {
