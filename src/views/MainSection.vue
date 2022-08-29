@@ -1,6 +1,11 @@
 <template>
   <div>
     <div class="mainSection">
+      <h1>Welcome to FilmFlick</h1>
+      <p>search for your favourite film</p>
+      <p>Add films to your watchlist</p>
+      <p>check out new up coming films</p>
+      <p></p>
       <the-main-section-items
         v-for="data in searchData"
         :key="data.id"
@@ -17,9 +22,9 @@
         <button class="moviesBtn">Find out more.</button>
       </div> -->
     </div>
-    <the-genres title="Genres" />
-    <the-trailers title="Trailers" />
-    <the-ratings title="Ratings" />
+    <the-genres title="GENRES" />
+    <the-trailers title="TRAILERS" />
+    <the-ratings title="RATINGS" />
     <the-footer />
   </div>
 </template>
@@ -41,19 +46,15 @@ export default {
     TheMainSectionItems,
   },
 
-  
-
-  
-
   data() {
-    
+    return {};
   },
 };
 </script>
 
 <style scoped>
 .mainSection {
-  background: blue;
+  background-color: #252525;
   min-height: 92vh;
   height: 100%;
   width: 100%;
@@ -80,5 +81,13 @@ export default {
 
 .moviesBtn {
   font-size: 2rem;
+}
+
+h1 {
+  color: white;
+}
+
+p {
+  color: white;
 }
 </style>

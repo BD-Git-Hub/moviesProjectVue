@@ -122,23 +122,23 @@ export default {
 <style scoped>
 h1 {
   padding: 1rem;
+  color: white;
 }
 .genreSection {
   height: 25rem;
-  background-color: pink;
-}
-
-.vueper-slides {
-  background-color: black;
+  background-color: #252525;
 }
 
 .vueper-slide {
-  color: white;
-  font-size: 2rem;
+  background-color: white;
+  font-size: 1.5rem;
   text-transform: uppercase;
-  background-color: purple;
+  border-top: solid transparent 0.5rem;
+  border-left: solid transparent 0.5rem;
 }
 
-
+.vueper-slide:hover {
+  border-top: solid red 0.5rem;
+  border-left: solid red 0.5rem;
+}
 </style>
-

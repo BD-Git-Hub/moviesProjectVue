@@ -1,11 +1,9 @@
 <template>
-  
-    <div :style="imageDiv">
-      <!-- <h1>{{ name }}</h1>
-      <p>{{ releaseDate }}</p>
-      <p>{{ voteAverage }}</p>  -->
-    </div>
-
+  <div :style="imageDiv">
+    <!-- <h1>{{ name }}</h1>
+      <p>{{ releaseDate }}</p> -->
+    <p>{{ voteAverage }}</p>
+  </div>
 
   <!-- <div class="image">
     <h1>{{name}}</h1>
@@ -29,13 +27,12 @@ export default {
       imageDiv: {
         height: "14rem",
         width: "14rem",
-        backgroundImage: "url(" + this.posterURL + ")" ,
+        backgroundImage: "url(" + this.posterURL + ")",
         backgroundSize: "100% 100%",
         backgroundRepeat: "no-repeat",
-        display: 'inline-block',
-        margin: '1rem'
-
-        
+        display: "inline-block",
+        margin: "1rem",
+        borderRadius: "0.8rem"
       },
     };
   },

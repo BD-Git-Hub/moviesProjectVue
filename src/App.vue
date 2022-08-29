@@ -1,6 +1,5 @@
 <template>
   <div>
-    
     <the-navigation-bar @searchSubmitted="searchSubmitted">
     </the-navigation-bar>
     <router-view />
@@ -18,6 +17,8 @@ const genreList = "genre/movie/list";
 const topRated = "movie/top_rated";
 const trendingForDay = "trending/all/day";
 const searchMovie = "search/movie";
+const genreSearchPartOne = "/movie/";
+const genreSearchPartTwo = "/similar";
 
 const dataRetrieval = async (searchParams) => {
   const data = await getData(APIURL + searchParams);
@@ -26,6 +27,11 @@ const dataRetrieval = async (searchParams) => {
 
 const requestData = async (searchParams, userParams) => {
   const data = await searchData(APIURL + searchParams, userParams);
+  return data;
+};
+
+const genreRetrieval = async (genreURLpartOne, id, genreURLpartTwo) => {
+  const data = await getData(APIURL + genreURLpartOne + id + genreURLpartTwo);
   return data;
 };
 
@@ -100,6 +106,7 @@ const convertSearchDataToStoredData = (data, storedData, ratingNumber) => {
           voteAverage: dataItem.vote_average,
           voteCount: dataItem.vote_count,
           releaseDate: dataItem.release_date,
+          genreID: dataItem.genre_ids,
         });
       });
     }
@@ -126,6 +133,7 @@ export default {
     convertDataToStoredData(genreData, this.genresData);
     convertDataToStoredData(ratingsData, this.ratingsData);
     convertDataToStoredData(trendingDayData, this.trendingDayData);
+
   },
   watch: {},
   provide() {
@@ -134,7 +142,7 @@ export default {
       genresData: this.genresData,
       ratingsData: this.ratingsData,
       trendingDayData: this.trendingDayData,
-      searchData: computed(() => this.searchData)
+      searchData: computed(() => this.searchData),
     };
   },
   methods: {
@@ -144,15 +152,47 @@ export default {
     },
     searchSubmitted(selectedGenre, selectedRating, userInput) {
       this.clearSearchData();
-      const queryUserInput = "&query=" + userInput;
-      const searchData = requestData(searchMovie, queryUserInput);
+      let searchData = [];
       const ratingNumber = selectedRating;
-      convertSearchDataToStoredData(searchData, this.searchData, ratingNumber);
-      
+
+      if (userInput) {
+        const queryUserInput = "&query=" + userInput;
+        searchData = requestData(searchMovie, queryUserInput);
+
+        convertSearchDataToStoredData(
+          searchData,
+          this.searchData,
+          ratingNumber
+        );
+      } else {
+        const receivedId = this.findGenre(selectedGenre, this.genresData);
+        searchData = genreRetrieval(
+          genreSearchPartOne,
+          receivedId,
+          genreSearchPartTwo
+        );
+
+        convertSearchDataToStoredData(
+          searchData,
+          this.searchData,
+          ratingNumber
+        );
+      }
     },
     clearSearchData() {
       this.searchData = [];
-    }
+    },
+    findGenre(chosenGenre, genreData) {
+      let foundID = "";
+
+      genreData.forEach((item) => {
+        if (item.name === chosenGenre) {
+          foundID = item.id;
+        }
+      });
+
+      return foundID;
+    },
   },
 
   data() {

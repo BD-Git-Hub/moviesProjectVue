@@ -18,7 +18,7 @@
         <option value="2">2</option>
         <option value="1">1</option>
       </select>
-      <input type="text" v-model="userInput" />
+      <input type="text" v-model="userInput" placeholder="search a film..." />
       <base-nav-button title="Submit" type="submit"></base-nav-button>
 
       <!-- <base-nav-button title="Genre"></base-nav-button> -->
@@ -36,6 +36,7 @@ export default {
   components: { BaseNavButton },
   inject: ["genresData"],
   emits: ["searchSubmitted"],
+  
   methods: {
     searchSubmit() {
       let selectedGenre = this.selectedGenre;
@@ -69,6 +70,6 @@ div {
 input {
   width: 30%;
   height: 3rem;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 </style>

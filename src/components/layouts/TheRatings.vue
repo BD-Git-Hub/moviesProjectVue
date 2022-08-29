@@ -14,12 +14,9 @@
       :arrows="true"
       :arrows-outside="false"
     >
-     
-
       <vueper-slide
         v-for="data in ratingsData"
         :key="data.id"
-        
         class="vueper-slide"
         :image="data.posterURL"
         :content="data.voteAverage.toString()"
@@ -33,11 +30,9 @@
 import { VueperSlides, VueperSlide } from "vueperslides";
 import "vueperslides/dist/vueperslides.css";
 
-
-
 export default {
   props: ["title"],
-  inject: ['ratingsData'],
+  inject: ["ratingsData"],
   components: {
     VueperSlides,
     VueperSlide,
@@ -69,31 +64,25 @@ export default {
           slideRatio: 1.5 / 10,
           visibleSlides: 5,
           bulletsOutside: true,
-
         },
 
         2000: {
           slideRatio: 1.5 / 10,
           visibleSlides: 5,
           bulletsOutside: true,
-
         },
 
         1800: {
           slideRatio: 2 / 10,
           visibleSlides: 5,
           bulletsOutside: false,
-
         },
-        
 
         1600: {
           slideRatio: 2 / 10,
           visibleSlides: 5,
           bulletsOutside: true,
-
         },
-        
 
         1200: {
           slideRatio: 3 / 10,
@@ -125,29 +114,35 @@ export default {
         },
       },
 
-      slides: [
-      
-      ],
+      slides: [],
     };
   },
 };
 </script>
 
 <style scoped>
+h1 {
+  padding: 1rem;
+
+  color: white;
+}
 .ratingSection {
   height: 25rem;
-  background-color: pink;
-}
-
-.vueper-slides {
-  background-color: purple;
+  background-color: #252525;
 }
 
 .vueper-slide {
   color: white;
   font-size: 1.5rem;
   text-transform: uppercase;
+  border-top: solid transparent 0.5rem;
+  border-left: solid transparent 0.5rem;
 }
 
+.vueper-slide:hover {
+  border-top: solid red 0.5rem;
+  border-left: solid red 0.5rem;
 
+  
+}
 </style>

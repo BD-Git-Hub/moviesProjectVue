@@ -26,7 +26,7 @@ export default {
 <style scoped>
 .container {
   height: 9vh;
-  background: red;
+  background: #252525;
   margin-inline: auto;
   width: 100%;
 }
