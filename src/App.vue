@@ -1,5 +1,6 @@
 <template>
   <div>
+    
     <the-navigation-bar @searchSubmitted="searchSubmitted">
     </the-navigation-bar>
     <router-view />
@@ -7,6 +8,7 @@
 </template>
 
 <script>
+import { computed } from "@vue/reactivity";
 import TheNavigationBar from "./components/layouts/TheNavigationBar.vue";
 import { getData, searchData } from "./fetch/fetchAPI";
 const APIURL = `https://api.themoviedb.org/3/`;
@@ -132,7 +134,7 @@ export default {
       genresData: this.genresData,
       ratingsData: this.ratingsData,
       trendingDayData: this.trendingDayData,
-      searchData: this.searchData,
+      searchData: computed(() => this.searchData)
     };
   },
   methods: {
@@ -141,12 +143,16 @@ export default {
       return randomNumber;
     },
     searchSubmitted(selectedGenre, selectedRating, userInput) {
+      this.clearSearchData();
       const queryUserInput = "&query=" + userInput;
       const searchData = requestData(searchMovie, queryUserInput);
       const ratingNumber = selectedRating;
-
       convertSearchDataToStoredData(searchData, this.searchData, ratingNumber);
+      
     },
+    clearSearchData() {
+      this.searchData = [];
+    }
   },
 
   data() {

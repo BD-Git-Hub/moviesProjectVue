@@ -1,8 +1,16 @@
 <template>
   <div>
     <div class="mainSection">
-      
-      <the-main-section-items v-for="data in searchedData" :key="data.id" :name="data.name" :description="data.description" :releaseDate="data.releaseDate" :voteAverage="data.voteAverage" :posterURL="data.posterURL" :id="data.id"/>
+      <the-main-section-items
+        v-for="data in searchData"
+        :key="data.id"
+        :name="data.name"
+        :description="data.description"
+        :releaseDate="data.releaseDate"
+        :voteAverage="data.voteAverage"
+        :posterURL="data.posterURL"
+        :id="data.id"
+      />
       <!-- <div class="moviesInfoGroup">
         <p class="moviesTitle">{{ trendingDayData}}</p>
          <p class="moviesRating">Rating</p> 
@@ -30,24 +38,15 @@ export default {
     TheFooter,
     TheGenres,
     TheRatings,
-    TheMainSectionItems
-},
-
- updated() {
-      
+    TheMainSectionItems,
   },
-  methods: {
-    randomFilmNumber() {
-      const randomNumber = Math.floor(Math.random() * 20);
-      return randomNumber;
-    },
-  }, 
+
+  
+
   
 
   data() {
-    return {
-      searchedData: this.searchData
-    };
+    
   },
 };
 </script>
@@ -58,7 +57,6 @@ export default {
   min-height: 92vh;
   height: 100%;
   width: 100%;
-  
 }
 
 .moviesInfoGroup {

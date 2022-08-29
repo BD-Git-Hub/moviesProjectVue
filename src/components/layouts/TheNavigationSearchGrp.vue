@@ -38,11 +38,17 @@ export default {
   emits: ["searchSubmitted"],
   methods: {
     searchSubmit() {
-      const selectedGenre = this.selectedGenre;
-      const selectedRating = this.selectedRating;
-      const userInput = this.userInput;
+      let selectedGenre = this.selectedGenre;
+      let selectedRating = this.selectedRating;
+      let userInput = this.userInput;
 
       this.$emit("searchSubmitted", selectedGenre, selectedRating, userInput);
+      this.resetInputFields();
+    },
+    resetInputFields() {
+      this.selectedGenre = "Action";
+      this.selectedRating = "10";
+      this.userInput = "";
     },
   },
   data() {
