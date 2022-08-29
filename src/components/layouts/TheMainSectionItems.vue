@@ -3,7 +3,7 @@
     <div :style="imageDiv">
       <!-- <h1>{{ name }}</h1>
       <p>{{ releaseDate }}</p>
-      <p>{{ voteAverage }}</p> -->
+      <p>{{ voteAverage }}</p>  -->
     </div>
 
 

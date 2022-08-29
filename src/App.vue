@@ -50,6 +50,7 @@ const convertDataToStoredData = (data, storedData) => {
         });
       });
     }
+
     if (dataArr[0].genres) {
       dataArr[0].genres.forEach((genreItem) => {
         storedData.push({
@@ -60,6 +61,57 @@ const convertDataToStoredData = (data, storedData) => {
     }
   });
 };
+
+const convertSearchDataToStoredData = (data, storedData, ratingNumber) => {
+  data.then((response) => {
+    let dataArr = [];
+
+    if (response[0]) {
+      dataArr.push(response[0]);
+    } else if (response[0].results) {
+      dataArr.push(response[0]);
+    }
+
+    if (dataArr[0].results && ratingNumber) {
+      let maxRatingArr = [];
+
+      maxRatingArr.push(
+        cutOffToMaxRatingNumber(dataArr[0].results, ratingNumber)
+      );
+
+      maxRatingArr[0].sort((firstItem, secondItem) => {
+        if (firstItem.vote_average > secondItem.vote_average) {
+          return -1;
+        } else if (firstItem.vote_average < secondItem.vote_average) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+
+      maxRatingArr[0].forEach((dataItem) => {
+        storedData.push({
+          name: dataItem.original_title || dataItem.name || dataItem.title,
+          id: dataItem.id,
+          description: dataItem.overview,
+          posterURL: url + dataItem.poster_path,
+          voteAverage: dataItem.vote_average,
+          voteCount: dataItem.vote_count,
+          releaseDate: dataItem.release_date,
+        });
+      });
+    }
+  });
+};
+
+const cutOffToMaxRatingNumber = (arr, ratingNumber) => {
+  const maxRatingArr = arr.filter(
+    (arrItem) => arrItem.vote_average < ratingNumber
+  );
+
+  return maxRatingArr;
+};
+
 export default {
   components: { TheNavigationBar },
   mounted() {
@@ -92,12 +144,9 @@ export default {
       const queryUserInput = "&query=" + userInput;
       const searchData = requestData(searchMovie, queryUserInput);
       const ratingNumber = selectedRating;
-      console.log(ratingNumber)
 
-
-      convertDataToStoredData(searchData, this.searchData);
+      convertSearchDataToStoredData(searchData, this.searchData, ratingNumber);
     },
-   
   },
 
   data() {
