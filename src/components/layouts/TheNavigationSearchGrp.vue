@@ -40,7 +40,7 @@ export default {
     }
   },
   inject: ["genresData"],
-  emits: ["searchSubmitted"],
+  emits: ["search-submitted"],
   mounted() {},
 
   methods: {
@@ -49,7 +49,7 @@ export default {
       let selectedRating = this.selectedRating;
       let userInput = this.userInput;
 
-      this.$emit("searchSubmitted", selectedGenre, selectedRating, userInput);
+      this.$emit("search-submitted", selectedGenre, selectedRating, userInput);
       this.resetInputFields();
     },
     resetInputFields() {

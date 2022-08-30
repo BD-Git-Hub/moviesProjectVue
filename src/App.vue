@@ -1,6 +1,6 @@
 <template>
   <div>
-    <the-navigation-bar @searchSubmitted="searchSubmitted">
+    <the-navigation-bar @search-submitted="searchSubmitted">
     </the-navigation-bar>
     <router-view @selected-film="selectedFilmSubmitted" />
   </div>
@@ -52,7 +52,7 @@ const convertDataToStoredData = (data, storedData) => {
       dataArr.push(response[0]);
     }
 
-    if (dataArr[0].results) {
+    if (dataArr[0].results && dataArr[0].results[0].title || dataArr[0].results && dataArr[0].results[0].original_name ) {
       dataArr[0].results.forEach((dataItem) => {
         storedData.push({
           name: dataItem.original_title || dataItem.name,
@@ -71,6 +71,25 @@ const convertDataToStoredData = (data, storedData) => {
         storedData.push({
           id: genreItem.id,
           name: genreItem.name,
+        });
+      });
+    }
+
+    if (dataArr[0].logos) {
+      dataArr[0].posters.forEach((imageItem) => {
+        storedData.push({
+          filePath: url + imageItem.file_path,
+          height: imageItem.height,
+          width: imageItem.width,
+        });
+      });
+    }
+
+    if (dataArr[0].cast) {
+      dataArr[0].cast.forEach((creditsItem) => {
+        storedData.push({
+          name: creditsItem.name,
+          character: creditsItem.character,
         });
       });
     }
@@ -136,6 +155,10 @@ export default {
     const ratingsData = dataRetrieval(topRated);
     const trendingDayData = dataRetrieval(trendingForDay);
 
+    
+
+    
+    
     convertDataToStoredData(trailersData, this.trailersData);
     convertDataToStoredData(genreData, this.genresData);
     convertDataToStoredData(ratingsData, this.ratingsData);
@@ -148,6 +171,10 @@ export default {
       ratingsData: this.ratingsData,
       trendingDayData: this.trendingDayData,
       searchData: computed(() => this.searchData),
+      selectedDataImage: computed(() => this.selectedDataImage),
+      
+      selectedDataCredits: computed(() => this.selectedDataCredits),
+      selectedFilmName: computed(() => this.selectedFilmName),
     };
   },
   methods: {
@@ -187,6 +214,12 @@ export default {
     clearSearchData() {
       this.searchData = [];
     },
+    clearSelectedData() {
+      this.selectedDataImage = [];
+      this.selectedDataCredits = [];
+      this.selectedFilmName = '';
+
+    },
     findGenre(chosenGenre, genreData) {
       let foundID = "";
 
@@ -198,22 +231,27 @@ export default {
 
       return foundID;
     },
-    selectedFilmSubmitted(filmID) {
-      console.log(filmID);
+    selectedFilmSubmitted(filmID, filmName) {
       this.clearSearchData();
+      this.clearSelectedData();
 
-      const selectedImage = requestImagesAndCredits(
+
+      const selectedImageData = requestImagesAndCredits(
         partOneMovie,
         filmID,
         searchImages
       );
-      console.log(selectedImage);
-      const selectedCredits = requestImagesAndCredits(
+      const selectedCreditsData = requestImagesAndCredits(
         partOneMovie,
         filmID,
         searchCredits
       );
-      console.log(selectedCredits);
+
+      convertDataToStoredData(selectedImageData, this.selectedDataImage);
+      convertDataToStoredData(selectedCreditsData, this.selectedDataCredits);
+      this.selectedFilmName = filmName;
+      console.log(this.selectedFilmName);
+
     },
   },
 
@@ -226,6 +264,8 @@ export default {
       searchData: [],
       selectedDataImage: [],
       selectedDataCredits: [],
+      selectedFilmName: '',
+
     };
   },
 };

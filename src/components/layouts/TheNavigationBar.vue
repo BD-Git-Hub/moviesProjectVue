@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <the-search-bar-group @searchSubmitted="searchSubmitted" />
+    <the-search-bar-group @search-submitted="searchSubmitted" />
     <the-navigation-group />
   </div>
 </template>
@@ -14,10 +14,15 @@ export default {
     TheSearchBarGroup,
     TheNavigationGroup,
   },
-  setup() {},
+  setup() {
+    return {
+
+    }
+  },
+  emits: ['search-submitted'],
   methods: {
     searchSubmitted(selectedGenre, selectedRating, userInput) {
-      this.$emit("searchSubmitted", selectedGenre, selectedRating, userInput);
+      this.$emit("search-submitted", selectedGenre, selectedRating, userInput);
     },
   },
 };
