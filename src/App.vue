@@ -2,7 +2,7 @@
   <div>
     <the-navigation-bar @searchSubmitted="searchSubmitted">
     </the-navigation-bar>
-    <router-view />
+    <router-view @selected-film="selectedFilmSubmitted" />
   </div>
 </template>
 
@@ -17,8 +17,10 @@ const genreList = "genre/movie/list";
 const topRated = "movie/top_rated";
 const trendingForDay = "trending/all/day";
 const searchMovie = "search/movie";
-const genreSearchPartOne = "/movie/";
+const partOneMovie = "/movie/";
 const genreSearchPartTwo = "/similar";
+const searchImages = "/images";
+const searchCredits = "/credits";
 
 const dataRetrieval = async (searchParams) => {
   const data = await getData(APIURL + searchParams);
@@ -32,6 +34,11 @@ const requestData = async (searchParams, userParams) => {
 
 const genreRetrieval = async (genreURLpartOne, id, genreURLpartTwo) => {
   const data = await getData(APIURL + genreURLpartOne + id + genreURLpartTwo);
+  return data;
+};
+
+const requestImagesAndCredits = async (partOneMovie, id, searchImages) => {
+  const data = await getData(APIURL + partOneMovie + id + searchImages);
   return data;
 };
 
@@ -133,7 +140,6 @@ export default {
     convertDataToStoredData(genreData, this.genresData);
     convertDataToStoredData(ratingsData, this.ratingsData);
     convertDataToStoredData(trendingDayData, this.trendingDayData);
-
   },
   provide() {
     return {
@@ -166,7 +172,7 @@ export default {
       } else {
         const receivedId = this.findGenre(selectedGenre, this.genresData);
         searchData = genreRetrieval(
-          genreSearchPartOne,
+          partOneMovie,
           receivedId,
           genreSearchPartTwo
         );
@@ -192,6 +198,23 @@ export default {
 
       return foundID;
     },
+    selectedFilmSubmitted(filmID) {
+      console.log(filmID);
+      this.clearSearchData();
+
+      const selectedImage = requestImagesAndCredits(
+        partOneMovie,
+        filmID,
+        searchImages
+      );
+      console.log(selectedImage);
+      const selectedCredits = requestImagesAndCredits(
+        partOneMovie,
+        filmID,
+        searchCredits
+      );
+      console.log(selectedCredits);
+    },
   },
 
   data() {
@@ -201,6 +224,8 @@ export default {
       ratingsData: [],
       trendingDayData: [],
       searchData: [],
+      selectedDataImage: [],
+      selectedDataCredits: [],
     };
   },
 };
@@ -218,6 +243,5 @@ export default {
 * {
   margin: 0;
   padding: 0;
-  
 }
 </style>

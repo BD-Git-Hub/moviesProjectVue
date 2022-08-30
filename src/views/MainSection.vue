@@ -15,9 +15,10 @@
           :voteAverage="data.voteAverage"
           :posterURL="data.posterURL"
           :id="data.id"
+          @click="selectedFilm(data.id)"
         />
       </div>
-      <div v-else>
+      <div v-else-if="dataSearched === true">
         <the-main-section-items
           v-for="data in searchData"
           :key="data.id"
@@ -27,8 +28,11 @@
           :voteAverage="data.voteAverage"
           :posterURL="data.posterURL"
           :id="data.id"
+          @click="selectedFilm(data.id)"
+
         />
       </div>
+       <the-main-section-selected-film v-if="filmSelected"/> 
     </div>
     <the-genres title="GENRES" />
     <the-trailers title="TRAILERS" />
@@ -43,6 +47,7 @@ import TheFooter from "../components/layouts/TheFooter.vue";
 import TheGenres from "@/components/layouts/TheGenres.vue";
 import TheRatings from "@/components/layouts/TheRatings.vue";
 import TheMainSectionItems from "@/components/layouts/TheMainSectionItems.vue";
+ import TheMainSectionSelectedFilm from "@/components/layouts/TheMainSectionSelectedFilm.vue";
 
 export default {
   inject: ["trendingDayData", "searchData"],
@@ -52,11 +57,14 @@ export default {
     TheGenres,
     TheRatings,
     TheMainSectionItems,
-  },
+   TheMainSectionSelectedFilm
+},
   watch: {
     searchData(value) {
       if (value) {
         this.dataSearched = true;
+        this.filmSelected = !this.filmSelected;
+
       }
     },
   },
@@ -64,7 +72,20 @@ export default {
   data() {
     return {
       dataSearched: false,
+      filmSelected: false,
     };
+  },
+  emits: ['selected-film'],
+
+  methods: {
+    selectedFilm(id) {
+      this.filmSelected = true;
+      this.filmSelected = !this.filmSelected;
+
+
+      this.$emit('selected-film', id);
+
+    },
   },
 };
 </script>
@@ -100,9 +121,8 @@ export default {
   font-size: 2rem;
 }
 
-h1,p {
+h1,
+p {
   color: white;
 }
-
-
 </style>
