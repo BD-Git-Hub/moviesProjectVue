@@ -17,7 +17,7 @@
       <vueper-slide
         v-for="data in trailerData"
         :key="data.id"
-        class="vueper-slide "
+        class="vueper-slide"
         :image="data.posterURL"
       >
       </vueper-slide>
@@ -128,10 +128,7 @@ h1 {
 .trailerSection {
   height: 25rem;
   background-color: #252525;
-  
 }
-
-
 
 .vueper-slide {
   color: white;
@@ -144,9 +141,5 @@ h1 {
 .vueper-slide:hover {
   border-top: solid red 0.5rem;
   border-left: solid red 0.5rem;
-
-  
 }
-
-
 </style>

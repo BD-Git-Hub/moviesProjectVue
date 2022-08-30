@@ -1,26 +1,34 @@
 <template>
   <div>
     <div class="mainSection">
-      <h1>Welcome to FilmFlick</h1>
-      <p>search for your favourite film</p>
-      <p>Add films to your watchlist</p>
-      <p>check out new up coming films</p>
-      <p></p>
-      <the-main-section-items
-        v-for="data in searchData"
-        :key="data.id"
-        :name="data.name"
-        :description="data.description"
-        :releaseDate="data.releaseDate"
-        :voteAverage="data.voteAverage"
-        :posterURL="data.posterURL"
-        :id="data.id"
-      />
-      <!-- <div class="moviesInfoGroup">
-        <p class="moviesTitle">{{ trendingDayData}}</p>
-         <p class="moviesRating">Rating</p> 
-        <button class="moviesBtn">Find out more.</button>
-      </div> -->
+      <div v-if="dataSearched === false">
+        <h1>Welcome to FilmFlick</h1>
+        <p>search for your favourite film</p>
+        <p>Add films to your watchlist</p>
+        <p>check out new up coming films</p>
+        <the-main-section-items
+          v-for="data in trendingDayData"
+          :key="data.id"
+          :name="data.name"
+          :description="data.description"
+          :releaseDate="data.releaseDate"
+          :voteAverage="data.voteAverage"
+          :posterURL="data.posterURL"
+          :id="data.id"
+        />
+      </div>
+      <div v-else>
+        <the-main-section-items
+          v-for="data in searchData"
+          :key="data.id"
+          :name="data.name"
+          :description="data.description"
+          :releaseDate="data.releaseDate"
+          :voteAverage="data.voteAverage"
+          :posterURL="data.posterURL"
+          :id="data.id"
+        />
+      </div>
     </div>
     <the-genres title="GENRES" />
     <the-trailers title="TRAILERS" />
@@ -45,9 +53,18 @@ export default {
     TheRatings,
     TheMainSectionItems,
   },
+  watch: {
+    searchData(value) {
+      if (value) {
+        this.dataSearched = true;
+      }
+    },
+  },
 
   data() {
-    return {};
+    return {
+      dataSearched: false,
+    };
   },
 };
 </script>

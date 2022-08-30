@@ -36,8 +36,15 @@ export default {
   components: { BaseNavButton },
   inject: ["genresData"],
   emits: ["searchSubmitted"],
+  mounted() {
+
+    
+
+  },
+  
   
   methods: {
+    
     searchSubmit() {
       let selectedGenre = this.selectedGenre;
       let selectedRating = this.selectedRating;

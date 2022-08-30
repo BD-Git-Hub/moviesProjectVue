@@ -135,7 +135,6 @@ export default {
     convertDataToStoredData(trendingDayData, this.trendingDayData);
 
   },
-  watch: {},
   provide() {
     return {
       trailerData: this.trailersData,
