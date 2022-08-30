@@ -135,13 +135,13 @@ h1 {
   color: white;
   font-size: 1.5rem;
   text-transform: uppercase;
-  border-top: solid transparent 0.5rem;
-  border-left: solid transparent 0.5rem;
+  border-top: solid transparent 0.2rem;
+  border-left: solid transparent 0.2rem;
 }
 
 .vueper-slide:hover {
-  border-top: solid red 0.5rem;
-  border-left: solid red 0.5rem;
+  border-top: solid red 0.2rem;
+  border-left: solid red 0.2rem;
 
   
 }

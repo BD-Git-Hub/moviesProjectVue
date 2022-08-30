@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <div class="submitFormDiv">
     <form @submit.prevent="searchSubmit">
-      <select name="Genre" v-model="selectedGenre">
+      <select name="Genre" v-model="selectedGenre" class="genreSelect">
         <option v-for="data in genresData" :key="data.id" :value="data.name">
           {{ data.name }}
         </option>
       </select>
-      <select name="Rating" v-model="selectedRating">
+      <select name="Rating" v-model="selectedRating" class="ratingSelect">
         <option value="10">10</option>
         <option value="9">9</option>
         <option value="8">8</option>
@@ -19,32 +19,31 @@
         <option value="1">1</option>
       </select>
       <input type="text" v-model="userInput" placeholder="search a film..." />
-      <base-nav-button title="Submit" type="submit"></base-nav-button>
+      <base-submit-button title="submit" class="submitBtn"/>
 
-      <!-- <base-nav-button title="Genre"></base-nav-button> -->
-      <!-- <base-nav-button title="Rating"></base-nav-button>
-        <input type="text" /> -->
+     
     </form>
   </div>
 </template>
 
 <script>
-import BaseNavButton from "../UI/BaseNavButton.vue";
+  import BaseSubmitButton from '../UI/BaseSubmitButton.vue'
 
 export default {
-  setup() {},
-  components: { BaseNavButton },
-  inject: ["genresData"],
-  emits: ["searchSubmitted"],
-  mounted() {
-
-    
+  components: {
+    BaseSubmitButton
 
   },
-  
-  
+  setup() {
+    return {
+
+    }
+  },
+  inject: ["genresData"],
+  emits: ["searchSubmitted"],
+  mounted() {},
+
   methods: {
-    
     searchSubmit() {
       let selectedGenre = this.selectedGenre;
       let selectedRating = this.selectedRating;
@@ -70,13 +69,58 @@ export default {
 </script>
 
 <style scoped>
-div {
+.submitFormDiv {
   float: left;
+  margin-top: 1rem;
+  border-top: solid red 0.1rem;
+  border-left: solid red 0.1rem;
+  border-bottom: solid black 0.1rem;
+  border-right: solid black 0.1rem;
+
+}
+
+.submitFormDiv:hover {
+  border-top: solid black 0.1rem;
+  border-left: solid black 0.1rem;
+  border-bottom: solid red 0.1rem;
+  border-right: solid red 0.1rem;
+
+
+}
+
+
+.genreSelect {
+  font-size: 1.5rem;
+  height: 3rem;
+  cursor: pointer;
+
+}
+
+.ratingSelect {
+  font-size: 1.5rem;
+  height: 3rem;
+  cursor: pointer;
+
 }
 
 input {
   width: 30%;
-  height: 3rem;
+  height: 2.8rem;
   font-size: 1.5rem;
+  cursor: pointer;
+
 }
+
+.submitBtn {
+  font-size: 1.5rem;
+  color: white;
+  background-color: #252525;
+  padding: 0.5rem;
+  cursor: pointer;
+  margin-left: 2rem;
+
+
+}
+
+
 </style>

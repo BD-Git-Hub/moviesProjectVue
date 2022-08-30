@@ -1,11 +1,11 @@
 <template>
   <div class="footerSection">
-    <p>The Movie Database API</p>
+    <a href="https://www.themoviedb.org/documentation/api"><p>The Movie Database API</p></a>
     <a href="https://antoniandre.github.io/vueper-slides/"
       ><p>vueper-slides package</p></a
     >
-    <p>Vue.js</p>
-    <p>© Bovin De Souza</p>
+    <a href="https://vuejs.org/"><p>Vue.js</p></a>
+    <a href="https://bovin-desouza.co.uk/"><p>© Bovin De Souza</p></a>
   </div>
 </template>
 

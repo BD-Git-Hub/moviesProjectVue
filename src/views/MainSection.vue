@@ -3,7 +3,7 @@
     <div class="mainSection">
       <div v-if="dataSearched === false">
         <h1>Welcome to FilmFlick</h1>
-        <p>search for your favourite film</p>
+        <p>Search your favourite film</p>
         <p>Add films to your watchlist</p>
         <p>check out new up coming films</p>
         <the-main-section-items
@@ -100,11 +100,9 @@ export default {
   font-size: 2rem;
 }
 
-h1 {
+h1,p {
   color: white;
 }
 
-p {
-  color: white;
-}
+
 </style>

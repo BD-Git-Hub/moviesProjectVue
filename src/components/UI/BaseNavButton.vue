@@ -35,7 +35,5 @@ button {
 
 button:hover {
   border-color: rgb(129, 50, 50);
-
-
 }
 </style>
