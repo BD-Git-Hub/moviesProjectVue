@@ -1,9 +1,15 @@
 <template>
-  <div :style="imageDiv">
-    <div class="imageGrp">
+  <div :style="containerDiv" v-if="selectedDataImage">
+    <div class="titleDiv">
       <h1>{{ selectedFilmName }}</h1>
-      <img :src="randomFilePath" />
     </div>
+    <img :src="randomFilePath" />
+
+    
+
+  </div>
+  <div v-else>
+    <p>NO DATA!</p>
   </div>
 </template>
 
@@ -12,14 +18,17 @@ export default {
   data() {
     return {
       dataImages: this.selectedDataImage,
-      imageDiv: {
-        height: "55rem",
+      containerDiv: {
+        height: "100%",
+        maxHeight: "61rem",
         width: "100%",
         maxWidth: "100%",
         backgroundColor: "black",
         backgroundSize: "100% 100%",
         backgroundRepeat: "no-repeat",
         display: "inline-block",
+        overflow: "hidden",
+        zIndex: "0",
       },
     };
   },
@@ -38,14 +47,14 @@ export default {
         }
       });
 
-      if (maxImageSizeArr.length > 0) {
+      if (maxImageSizeArr.length) {
         return maxImageSizeArr[
-          Math.floor(Math.random() * maxImageSizeArr.length - 1)
+          Math.floor(Math.random() * maxImageSizeArr.length)
         ].filePath;
       } else {
         return lowImagesSizeArr[
-        Math.floor(Math.random() * lowImagesSizeArr.length - 1)
-      ].filePath;
+          Math.floor(Math.random() * lowImagesSizeArr.length)
+        ].filePath;
       }
     },
   },
@@ -55,23 +64,19 @@ export default {
 <style>
 h1 {
   text-transform: uppercase;
-  z-index: 5;
+  z-index: 20;
 }
 
-h1,
-p {
+.titleDiv {
+ 
   color: white;
-}
-
-.imageGrp {
-  height: 100%;
-  overflow: hidden;
-  background-color: black;
+  background-color: red;
+  width: auto;
+  
 }
 
 img {
   width: 100%;
   height: auto;
-  
 }
 </style>

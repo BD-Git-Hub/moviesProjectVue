@@ -266,7 +266,7 @@ export default {
       convertDataToStoredData(selectedCreditsData, this.selectedDataCredits);
       this.selectedFilmName = filmName;
 
-      console.log(selectedImageData);
+      console.log(this.selectedDataImage);
     },
   },
 

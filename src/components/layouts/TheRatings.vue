@@ -137,6 +137,8 @@ h1 {
   text-transform: uppercase;
   border-top: solid transparent 0.2rem;
   border-left: solid transparent 0.2rem;
+  border-radius: 2rem;
+
 }
 
 .vueper-slide:hover {

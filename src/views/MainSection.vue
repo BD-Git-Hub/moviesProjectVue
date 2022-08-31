@@ -80,8 +80,6 @@ export default {
     selectedFilm(id, name) {
       this.filmSelected = true;
       this.filmSelected = !this.filmSelected;
-
-
       this.$emit("selected-film", id, name);
     },
   },
