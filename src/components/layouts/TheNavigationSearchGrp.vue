@@ -72,21 +72,11 @@ export default {
 .submitFormDiv {
   float: left;
   margin-top: 1rem;
-  border-top: solid red 0.1rem;
-  border-left: solid red 0.1rem;
-  border-bottom: solid black 0.1rem;
-  border-right: solid black 0.1rem;
+  
 
 }
 
-.submitFormDiv:hover {
-  border-top: solid black 0.1rem;
-  border-left: solid black 0.1rem;
-  border-bottom: solid red 0.1rem;
-  border-right: solid red 0.1rem;
 
-
-}
 
 
 .genreSelect {
@@ -115,9 +105,16 @@ input {
   font-size: 1.5rem;
   color: white;
   background-color: #252525;
-  padding: 0.5rem;
   cursor: pointer;
-  margin-left: 2rem;
+  text-decoration: none;
+
+	border: none;
+	padding-top: 0.6rem;
+  padding-right: 1rem;
+  padding-bottom: 0.6rem;
+  padding-left: 1rem;
+	outline: inherit;
+  background-color: red;
 
 
 }

@@ -12,6 +12,7 @@ import TheNavigationBar from "./components/layouts/TheNavigationBar.vue";
 import { getData, searchData } from "./fetch/fetchAPI";
 const APIURL = `https://api.themoviedb.org/3/`;
 const url = "https://image.tmdb.org/t/p/w500";
+const originalUrl = "https://image.tmdb.org/t/p/original/";
 const upcomingMovie = "movie/upcoming";
 const genreList = "genre/movie/list";
 const topRated = "movie/top_rated";
@@ -52,7 +53,10 @@ const convertDataToStoredData = (data, storedData) => {
       dataArr.push(response[0]);
     }
 
-    if (dataArr[0].results && dataArr[0].results[0].title || dataArr[0].results && dataArr[0].results[0].original_name ) {
+    if (
+      (dataArr[0].results && dataArr[0].results[0].title) ||
+      (dataArr[0].results && dataArr[0].results[0].original_name)
+    ) {
       dataArr[0].results.forEach((dataItem) => {
         storedData.push({
           name: dataItem.original_title || dataItem.name,
@@ -78,10 +82,27 @@ const convertDataToStoredData = (data, storedData) => {
     if (dataArr[0].logos) {
       dataArr[0].posters.forEach((imageItem) => {
         storedData.push({
-          filePath: url + imageItem.file_path,
+          filePath: originalUrl + imageItem.file_path,
           height: imageItem.height,
           width: imageItem.width,
         });
+      });
+      dataArr[0].backdrops.forEach((imageItem) => {
+        if (imageItem.height == 1080 && imageItem.width == 1920) {
+          storedData.push({
+            filePath: originalUrl + imageItem.file_path,
+            height: imageItem.height,
+            width: imageItem.width,
+          });
+        } else {
+          storedData.push({
+            filePath: originalUrl + imageItem.file_path,
+            height: imageItem.height,
+            width: imageItem.width,
+
+          })
+        }
+
       });
     }
 
@@ -155,10 +176,6 @@ export default {
     const ratingsData = dataRetrieval(topRated);
     const trendingDayData = dataRetrieval(trendingForDay);
 
-    
-
-    
-    
     convertDataToStoredData(trailersData, this.trailersData);
     convertDataToStoredData(genreData, this.genresData);
     convertDataToStoredData(ratingsData, this.ratingsData);
@@ -172,7 +189,7 @@ export default {
       trendingDayData: this.trendingDayData,
       searchData: computed(() => this.searchData),
       selectedDataImage: computed(() => this.selectedDataImage),
-      
+
       selectedDataCredits: computed(() => this.selectedDataCredits),
       selectedFilmName: computed(() => this.selectedFilmName),
     };
@@ -217,8 +234,7 @@ export default {
     clearSelectedData() {
       this.selectedDataImage = [];
       this.selectedDataCredits = [];
-      this.selectedFilmName = '';
-
+      this.selectedFilmName = "";
     },
     findGenre(chosenGenre, genreData) {
       let foundID = "";
@@ -235,7 +251,6 @@ export default {
       this.clearSearchData();
       this.clearSelectedData();
 
-
       const selectedImageData = requestImagesAndCredits(
         partOneMovie,
         filmID,
@@ -250,8 +265,8 @@ export default {
       convertDataToStoredData(selectedImageData, this.selectedDataImage);
       convertDataToStoredData(selectedCreditsData, this.selectedDataCredits);
       this.selectedFilmName = filmName;
-      console.log(this.selectedFilmName);
 
+      console.log(selectedImageData);
     },
   },
 
@@ -264,8 +279,7 @@ export default {
       searchData: [],
       selectedDataImage: [],
       selectedDataCredits: [],
-      selectedFilmName: '',
-
+      selectedFilmName: "",
     };
   },
 };
