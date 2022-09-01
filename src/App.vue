@@ -189,6 +189,7 @@ export default {
       trendingDayData: this.trendingDayData,
       searchData: computed(() => this.searchData),
       selectedDataImage: computed(() => this.selectedDataImage),
+      // selectedDataImage:  this.selectedDataImage,
 
       selectedDataCredits: computed(() => this.selectedDataCredits),
       selectedFilmName: computed(() => this.selectedFilmName),
@@ -201,6 +202,7 @@ export default {
     },
     searchSubmitted(selectedGenre, selectedRating, userInput) {
       this.clearSearchData();
+      this.clearSelectedData()
       let searchData = [];
       const ratingNumber = selectedRating;
 

@@ -5,8 +5,6 @@
     </div>
     <img :src="randomFilePath" />
 
-    
-
   </div>
   <div v-else>
     <p>NO DATA!</p>
@@ -68,7 +66,6 @@ h1 {
 }
 
 .titleDiv {
- 
   color: white;
   background-color: red;
   width: auto;
