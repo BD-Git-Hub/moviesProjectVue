@@ -30,10 +30,13 @@ export const getData = async (APIURL) => {
 
 export const searchData = async (APIURL, userParams) => {
   let movies = [];
-
-  // console.log(`${APIURL}${APIKey}${userParams}`)
+  const query = "&query="
   
-  await fetch(`${APIURL}${APIKey}${userParams}`)
+
+
+    // console.log(`${APIURL}${APIKey}${query}${userParams}`)
+  
+  await fetch(`${APIURL}${APIKey}${query}${userParams}`)
     .then((response) => {
       if (response.ok) {
         return response.json();

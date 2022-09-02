@@ -19,6 +19,8 @@
         :key="data.id"
         class="vueper-slide"
         :image="data.posterURL"
+        @click="selectedTrailer(data.id, data.name)"
+        
       >
       </vueper-slide>
     </vueper-slides>
@@ -30,7 +32,7 @@ import { VueperSlides, VueperSlide } from "vueperslides";
 import "vueperslides/dist/vueperslides.css";
 
 export default {
-  props: ["title"],
+  props: ["title", "selectedTrailer"],
   inject: ["trailerData"],
   components: {
     VueperSlides,

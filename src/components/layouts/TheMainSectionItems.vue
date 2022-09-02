@@ -4,16 +4,10 @@
     class="divStyle"
     
   >
-    <!-- <h1>{{ name }}</h1>
-      <p>{{ releaseDate }}</p>
-    <p>{{ voteAverage }}</p>  -->
+  
   </div>
 
-  <!-- <div class="image">
-    <h1>{{name}}</h1>
-    <p>{{releaseDate}}</p>
-    <p>{{voteAverage}}</p>
-</div> -->
+  
 </template>
 
 <script>

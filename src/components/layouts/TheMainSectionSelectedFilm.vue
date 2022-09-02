@@ -1,10 +1,11 @@
 <template>
   <div :style="containerDiv" v-if="selectedDataImage">
-    <div class="titleDiv">
-      <h1>{{ selectedFilmName }}</h1>
-    </div>
     <img :src="randomFilePath" />
-
+    <div class="titleDivGrp">
+      <h1>{{ selectedFilmName }}</h1>
+      <p>Rating</p>
+      <p>Description</p>
+    </div>
   </div>
   <div v-else>
     <p>NO DATA!</p>
@@ -20,6 +21,7 @@ export default {
         height: "100%",
         maxHeight: "61rem",
         width: "100%",
+        minWidth: "36rem",
         maxWidth: "100%",
         backgroundColor: "black",
         backgroundSize: "100% 100%",
@@ -49,10 +51,12 @@ export default {
         return maxImageSizeArr[
           Math.floor(Math.random() * maxImageSizeArr.length)
         ].filePath;
-      } else {
+      } else if (lowImagesSizeArr.length) {
         return lowImagesSizeArr[
           Math.floor(Math.random() * lowImagesSizeArr.length)
         ].filePath;
+      } else {
+        return this.dataImages;
       }
     },
   },
@@ -60,20 +64,25 @@ export default {
 </script>
 
 <style>
+.titleDivGrp {
+  color: white;
+  background-color: rgba(120, 120, 120, 0.3);
+  width: auto;
+  position: absolute;
+  bottom: 20%;
+  left: 5%;
+  border-radius: 1rem;
+}
+
 h1 {
   text-transform: uppercase;
   z-index: 20;
-}
-
-.titleDiv {
-  color: white;
-  background-color: red;
-  width: auto;
-  
+  font-size: 2vmax;
 }
 
 img {
   width: 100%;
   height: auto;
+  min-width: 20rem;
 }
 </style>

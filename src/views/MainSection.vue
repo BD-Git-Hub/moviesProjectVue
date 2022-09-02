@@ -18,7 +18,9 @@
           @click="selectedFilm(data.id, data.name)"
         />
       </div>
-      <div v-else-if="dataSearched === true">
+
+      <!-- <div v-else-if="dataSearched === true"> -->
+      <div v-else>
         <the-main-section-items
           v-for="data in searchData"
           :key="data.id"
@@ -34,7 +36,7 @@
       <the-main-section-selected-film v-if="filmSelected" />
     </div>
     <the-genres title="GENRES" />
-    <the-trailers title="TRAILERS" />
+    <the-trailers title="TRAILERS" :selectedTrailer="selectedFilm"/>
     <the-ratings title="RATINGS" />
     <the-footer />
   </div>

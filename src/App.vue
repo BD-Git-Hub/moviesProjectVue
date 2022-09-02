@@ -99,10 +99,8 @@ const convertDataToStoredData = (data, storedData) => {
             filePath: originalUrl + imageItem.file_path,
             height: imageItem.height,
             width: imageItem.width,
-
-          })
+          });
         }
-
       });
     }
 
@@ -176,10 +174,14 @@ export default {
     const ratingsData = dataRetrieval(topRated);
     const trendingDayData = dataRetrieval(trendingForDay);
 
+ 
+
     convertDataToStoredData(trailersData, this.trailersData);
     convertDataToStoredData(genreData, this.genresData);
     convertDataToStoredData(ratingsData, this.ratingsData);
     convertDataToStoredData(trendingDayData, this.trendingDayData);
+
+
   },
   provide() {
     return {
@@ -189,8 +191,6 @@ export default {
       trendingDayData: this.trendingDayData,
       searchData: computed(() => this.searchData),
       selectedDataImage: computed(() => this.selectedDataImage),
-      // selectedDataImage:  this.selectedDataImage,
-
       selectedDataCredits: computed(() => this.selectedDataCredits),
       selectedFilmName: computed(() => this.selectedFilmName),
     };
@@ -202,7 +202,7 @@ export default {
     },
     searchSubmitted(selectedGenre, selectedRating, userInput) {
       this.clearSearchData();
-      this.clearSelectedData()
+      this.clearSelectedData();
       let searchData = [];
       const ratingNumber = selectedRating;
 
@@ -253,11 +253,17 @@ export default {
       this.clearSearchData();
       this.clearSelectedData();
 
+      requestData(searchMovie, filmName);
+      
+
       const selectedImageData = requestImagesAndCredits(
         partOneMovie,
         filmID,
         searchImages
       );
+
+      
+
       const selectedCreditsData = requestImagesAndCredits(
         partOneMovie,
         filmID,
@@ -267,8 +273,6 @@ export default {
       convertDataToStoredData(selectedImageData, this.selectedDataImage);
       convertDataToStoredData(selectedCreditsData, this.selectedDataCredits);
       this.selectedFilmName = filmName;
-
-      console.log(this.selectedDataImage);
     },
   },
 
