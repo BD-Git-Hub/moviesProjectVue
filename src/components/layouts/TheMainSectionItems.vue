@@ -1,13 +1,5 @@
 <template>
-  <div
-    :style="imageDiv"
-    class="divStyle"
-    
-  >
-  
-  </div>
-
-  
+  <div :style="imageDiv" class="divStyle"></div>
 </template>
 
 <script>
@@ -20,7 +12,6 @@ export default {
     "posterURL",
     "id",
   ],
-  
 
   data() {
     return {
@@ -49,8 +40,9 @@ export default {
 }
 
 .divStyle:hover {
-  border-right: solid red 0.2rem;
-  border-bottom: solid red 0.2rem;
+  border-right: solid pink 0.2rem;
+  border-bottom: solid orange 0.2rem;
+  box-shadow: 0.1rem 0.1rem 1rem orange;
 }
 
 h1 {

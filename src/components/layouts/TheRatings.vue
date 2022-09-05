@@ -20,6 +20,7 @@
         class="vueper-slide"
         :image="data.posterURL"
         :content="data.voteAverage.toString()"
+        @click="selectedFilmSubmitted(data.id, data.name)"
       >
       </vueper-slide>
     </vueper-slides>
@@ -32,7 +33,7 @@ import "vueperslides/dist/vueperslides.css";
 
 export default {
   props: ["title"],
-  inject: ["ratingsData"],
+  inject: ["ratingsData", "selectedFilmSubmitted"],
   components: {
     VueperSlides,
     VueperSlide,
@@ -123,28 +124,33 @@ export default {
 <style scoped>
 h1 {
   padding: 1rem;
-
   color: white;
 }
 .ratingSection {
   height: 25rem;
-  background-color: #252525;
+  background-color: #121212;
+
+}
+
+.vuper-Text {
+  color: red;
 }
 
 .vueper-slide {
   color: white;
   font-size: 1.5rem;
   text-transform: uppercase;
-  border-top: solid transparent 0.2rem;
-  border-left: solid transparent 0.2rem;
+  border-right: solid black 0.2rem;
+  border-bottom: solid black 0.2rem;
+  box-shadow: 0.1rem 0.1rem 0.1rem black;
   border-radius: 2rem;
+  cursor: pointer;
 
 }
 
 .vueper-slide:hover {
-  border-top: solid red 0.2rem;
-  border-left: solid red 0.2rem;
-
-  
+  border-right: solid pink 0.2rem;
+  border-bottom: solid orange 0.2rem;
+  box-shadow: 0.1rem 0.1rem 1rem orange;
 }
 </style>

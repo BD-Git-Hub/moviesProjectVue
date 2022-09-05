@@ -1,7 +1,21 @@
 <template>
   <div>
     <div class="mainSection">
-      <div v-if="dataSearched === false">
+      <div v-if="submitSectionDisplay">
+        <the-main-section-items
+          v-for="data in searchData"
+          :key="data.id"
+          :name="data.name"
+          :description="data.description"
+          :releaseDate="data.releaseDate"
+          :voteAverage="data.voteAverage"
+          :posterURL="data.posterURL"
+          :id="data.id"
+          @click="selectedFilmSubmitted(data.id, data.name, submitSection)"
+        />
+      </div>
+      <the-main-section-selected-film v-else-if="selectedFilmToggle"/>
+      <div v-else>
         <h1>Welcome to FilmFlick</h1>
         <p>Search your favourite film</p>
         <p>Add films to your watchlist</p>
@@ -15,28 +29,12 @@
           :voteAverage="data.voteAverage"
           :posterURL="data.posterURL"
           :id="data.id"
-          @click="selectedFilm(data.id, data.name)"
+          @click="selectedFilmSubmitted(data.id, data.name, welcomeSection)"
         />
       </div>
-
-      <!-- <div v-else-if="dataSearched === true"> -->
-      <div v-else>
-        <the-main-section-items
-          v-for="data in searchData"
-          :key="data.id"
-          :name="data.name"
-          :description="data.description"
-          :releaseDate="data.releaseDate"
-          :voteAverage="data.voteAverage"
-          :posterURL="data.posterURL"
-          :id="data.id"
-          @click="selectedFilm(data.id, data.name)"
-        />
-      </div>
-      <the-main-section-selected-film v-if="filmSelected" />
     </div>
     <the-genres title="GENRES" />
-    <the-trailers title="TRAILERS" :selectedTrailer="selectedFilm"/>
+    <the-trailers title="TRAILERS"/>
     <the-ratings title="RATINGS" />
     <the-footer />
   </div>
@@ -51,7 +49,7 @@ import TheMainSectionItems from "@/components/layouts/TheMainSectionItems.vue";
 import TheMainSectionSelectedFilm from "@/components/layouts/TheMainSectionSelectedFilm.vue";
 
 export default {
-  inject: ["trendingDayData", "searchData"],
+  inject: ["trendingDayData", "searchData", "submitSectionDisplay", "selectedFilmToggle", "selectedFilmSubmitted"],
   components: {
     TheTrailers,
     TheFooter,
@@ -61,36 +59,24 @@ export default {
     TheMainSectionSelectedFilm,
   },
 
-  watch: {
-    searchData(value) {
-      if (value) {
-        this.dataSearched = true;
-        this.filmSelected = !this.filmSelected;
-      }
-    },
-  },
+  
 
   data() {
     return {
-      dataSearched: false,
-      filmSelected: false,
+      submitSection:'submitSection',
+      welcomeSection: "welcomeSection"
     };
   },
   emits: ["selected-film"],
 
-  methods: {
-    selectedFilm(id, name) {
-      this.filmSelected = true;
-      this.filmSelected = !this.filmSelected;
-      this.$emit("selected-film", id, name);
-    },
-  },
+  
 };
 </script>
 
 <style scoped>
 .mainSection {
-  background-color: #252525;
+  background-color: #121212;
+  
   min-height: 92vh;
   height: 100%;
   width: 100%;

@@ -126,7 +126,7 @@ h1 {
 }
 .genreSection {
   height: 25rem;
-  background-color: #252525;
+  background-color: #121212;
 }
 
 .vueper-slide {
@@ -135,13 +135,20 @@ h1 {
   font-size: 1.5rem;
   border-radius: 2rem;
   text-transform: uppercase;
-  border-top: solid transparent 0.2rem;
-  border-left: solid transparent 0.2rem;
+  border-right: solid black 0.2rem;
+  border-bottom: solid black 0.2rem;
+  box-shadow: 0.1rem 0.1rem 0.1rem black;
+
   cursor: pointer;
 }
 
 .vueper-slide:hover {
-  border-top: solid red 0.2rem;
-  border-left: solid red 0.2rem;
+  border-right: solid pink 0.2rem;
+  border-bottom: solid orange 0.2rem;
+  box-shadow: 0.1rem 0.1rem 1rem orange;
 }
 </style>
+
+
+  
+

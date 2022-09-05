@@ -174,14 +174,10 @@ export default {
     const ratingsData = dataRetrieval(topRated);
     const trendingDayData = dataRetrieval(trendingForDay);
 
- 
-
     convertDataToStoredData(trailersData, this.trailersData);
     convertDataToStoredData(genreData, this.genresData);
     convertDataToStoredData(ratingsData, this.ratingsData);
     convertDataToStoredData(trendingDayData, this.trendingDayData);
-
-
   },
   provide() {
     return {
@@ -193,6 +189,9 @@ export default {
       selectedDataImage: computed(() => this.selectedDataImage),
       selectedDataCredits: computed(() => this.selectedDataCredits),
       selectedFilmName: computed(() => this.selectedFilmName),
+      selectedFilmSubmitted: this.selectedFilmSubmitted,
+      selectedFilmToggle: computed(() => this.selectedFilmToggle),
+      submitSectionDisplay: computed(() => this.submitSectionDisplay),
     };
   },
   methods: {
@@ -205,6 +204,8 @@ export default {
       this.clearSelectedData();
       let searchData = [];
       const ratingNumber = selectedRating;
+      const submitClicked = "submitClicked";
+      this.toggleDisplays(submitClicked);
 
       if (userInput) {
         const queryUserInput = "&query=" + userInput;
@@ -249,20 +250,38 @@ export default {
 
       return foundID;
     },
-    selectedFilmSubmitted(filmID, filmName) {
+
+    toggleDisplays(sectionName) {
+
+      if (sectionName === "welcomeSection") {
+        this.selectedFilmToggle = true;
+        this.submitSectionDisplay = false;
+      } else if (sectionName === "trailerSection") {
+        this.selectedFilmToggle = true;
+
+        this.submitSectionDisplay = false;
+      } else if (sectionName === "submitClicked") {
+        this.selectedFilmToggle = false;
+        this.submitSectionDisplay = true;
+      } else if (sectionName === "submitSection") {
+        this.selectedFilmToggle = true;
+        this.submitSectionDisplay = false;
+      } 
+
+    },
+    selectedFilmSubmitted(filmID, filmName, sectionName) {
       this.clearSearchData();
       this.clearSelectedData();
 
+      this.toggleDisplays(sectionName);
+
       requestData(searchMovie, filmName);
-      
 
       const selectedImageData = requestImagesAndCredits(
         partOneMovie,
         filmID,
         searchImages
       );
-
-      
 
       const selectedCreditsData = requestImagesAndCredits(
         partOneMovie,
@@ -286,6 +305,8 @@ export default {
       selectedDataImage: [],
       selectedDataCredits: [],
       selectedFilmName: "",
+      submitSectionDisplay: false,
+      selectedFilmToggle: false,
     };
   },
 };

@@ -1,5 +1,5 @@
 <template>
-  <div :style="containerDiv" v-if="selectedDataImage">
+  <div :style="containerDiv" >
     <img :src="randomFilePath" />
     <div class="titleDivGrp">
       <h1>{{ selectedFilmName }}</h1>
@@ -7,7 +7,7 @@
       <p>Description</p>
     </div>
   </div>
-  <div v-else>
+  <div >
     <p>NO DATA!</p>
   </div>
 </template>
@@ -16,7 +16,7 @@
 export default {
   data() {
     return {
-      dataImages: this.selectedDataImage,
+      
       containerDiv: {
         height: "100%",
         maxHeight: "61rem",
@@ -38,7 +38,7 @@ export default {
       const maxImageSizeArr = [];
       const lowImagesSizeArr = [];
 
-      this.dataImages.forEach((item) => {
+      this.selectedDataImage.forEach((item) => {
         if (item.height === 3000 && item.width === 2000) {
           maxImageSizeArr.push(item);
           return;
@@ -56,7 +56,7 @@ export default {
           Math.floor(Math.random() * lowImagesSizeArr.length)
         ].filePath;
       } else {
-        return this.dataImages;
+        return this.selectedDataImage;
       }
     },
   },
