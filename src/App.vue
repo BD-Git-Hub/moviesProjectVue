@@ -25,11 +25,17 @@ const searchCredits = "/credits";
 
 const dataRetrieval = async (searchParams) => {
   const data = await getData(APIURL + searchParams);
+
   return data;
 };
 
 const requestData = async (searchParams, userParams) => {
   const data = await searchData(APIURL + searchParams, userParams);
+
+  if (data[0].results.length === 0) {
+    console.log("ERROR!");
+  }
+
   return data;
 };
 
@@ -252,7 +258,6 @@ export default {
     },
 
     toggleDisplays(sectionName) {
-
       if (sectionName === "welcomeSection") {
         this.selectedFilmToggle = true;
         this.submitSectionDisplay = false;
@@ -266,8 +271,12 @@ export default {
       } else if (sectionName === "submitSection") {
         this.selectedFilmToggle = true;
         this.submitSectionDisplay = false;
-      } 
+      } else if (sectionName === "ratingsSection") {
+        this.selectedFilmToggle = true;
+        this.submitSectionDisplay = false;
 
+
+      }
     },
     selectedFilmSubmitted(filmID, filmName, sectionName) {
       this.clearSearchData();

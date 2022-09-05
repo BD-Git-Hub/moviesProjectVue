@@ -16,10 +16,10 @@
       </div>
       <the-main-section-selected-film v-else-if="selectedFilmToggle"/>
       <div v-else>
-        <h1>Welcome to FilmFlick</h1>
-        <p>Search your favourite film</p>
-        <p>Add films to your watchlist</p>
-        <p>check out new up coming films</p>
+        <h1><span class="spanOne">Film</span><span class="spanTwo">Flick</span></h1>
+        <p>Search your favourite films</p>
+        <p>Add films to your watchlists</p>
+        <p>check out up coming films</p>
         <the-main-section-items
           v-for="data in trendingDayData"
           :key="data.id"
@@ -39,6 +39,7 @@
     <the-footer />
   </div>
 </template>
+
 
 <script>
 import TheTrailers from "../components/layouts/TheTrailers.vue";
@@ -76,8 +77,8 @@ export default {
 <style scoped>
 .mainSection {
   background-color: #121212;
-  
-  min-height: 92vh;
+  overflow: hidden;
+  min-height: 105vh;
   height: 100%;
   width: 100%;
 }
@@ -109,4 +110,18 @@ h1,
 p {
   color: white;
 }
+
+.spanOne {
+  color: orange;
+
+ 
+
+}
+
+.spanTwo {
+  color: pink;
+
+}
+
+
 </style>

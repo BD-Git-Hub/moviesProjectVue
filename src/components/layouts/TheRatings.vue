@@ -20,7 +20,7 @@
         class="vueper-slide"
         :image="data.posterURL"
         :content="data.voteAverage.toString()"
-        @click="selectedFilmSubmitted(data.id, data.name)"
+        @click="selectedFilmSubmitted(data.id, data.name, ratingsSection)"
       >
       </vueper-slide>
     </vueper-slides>
@@ -40,6 +40,7 @@ export default {
   },
   data() {
     return {
+      ratingsSection: "ratingsSection",
       breakpoints: {
         4000: {
           slideRatio: 0.8 / 10,
@@ -137,6 +138,8 @@ h1 {
 }
 
 .vueper-slide {
+  margin-top: 0.3rem;
+  margin-bottom: 0.5rem;
   color: white;
   font-size: 1.5rem;
   text-transform: uppercase;
@@ -145,6 +148,8 @@ h1 {
   box-shadow: 0.1rem 0.1rem 0.1rem black;
   border-radius: 2rem;
   cursor: pointer;
+  transition: 2.5s;
+
 
 }
 
@@ -152,5 +157,7 @@ h1 {
   border-right: solid pink 0.2rem;
   border-bottom: solid orange 0.2rem;
   box-shadow: 0.1rem 0.1rem 1rem orange;
+  transition: 0.3s;
+
 }
 </style>

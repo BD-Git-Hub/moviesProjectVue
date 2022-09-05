@@ -1,5 +1,5 @@
 <template>
-  <div :style="containerDiv" >
+  <div :style="containerDiv">
     <img :src="randomFilePath" />
     <div class="titleDivGrp">
       <h1>{{ selectedFilmName }}</h1>
@@ -7,16 +7,12 @@
       <p>Description</p>
     </div>
   </div>
-  <div >
-    <p>NO DATA!</p>
-  </div>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      
       containerDiv: {
         height: "100%",
         maxHeight: "61rem",
@@ -27,8 +23,9 @@ export default {
         backgroundSize: "100% 100%",
         backgroundRepeat: "no-repeat",
         display: "inline-block",
-        overflow: "hidden",
         zIndex: "0",
+  overflow: "hidden"
+        
       },
     };
   },

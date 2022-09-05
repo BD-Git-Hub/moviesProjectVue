@@ -19,7 +19,6 @@ export default {
       imageDiv: {
         height: "14rem",
         width: "14rem",
-
         backgroundImage: "url(" + this.posterURL + ")",
         backgroundSize: "100% 100%",
         backgroundRepeat: "no-repeat",
@@ -37,12 +36,16 @@ export default {
 .divStyle {
   border-right: solid black 0.2rem;
   border-bottom: solid black 0.2rem;
+  transition: 2.5s;
+
 }
 
 .divStyle:hover {
   border-right: solid pink 0.2rem;
   border-bottom: solid orange 0.2rem;
   box-shadow: 0.1rem 0.1rem 1rem orange;
+  transition: 0.3s;
+
 }
 
 h1 {

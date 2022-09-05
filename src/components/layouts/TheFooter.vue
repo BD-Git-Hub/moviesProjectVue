@@ -17,7 +17,8 @@
 }
 
 p {
-  font-size: 2vw;
+  font-size: 1.9vw;
+  
 
   display: inline;
   margin: 1.5rem 1rem 1.5rem 1rem;
@@ -25,6 +26,7 @@ p {
   border-right: solid black 0.1rem;
   border-bottom: solid black 0.1rem;
   box-shadow: 0.1rem 0.1rem 1rem black;
+  border-radius: 0.5rem;
 }
 
 a {

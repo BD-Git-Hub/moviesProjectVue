@@ -20,7 +20,6 @@
         class="vueper-slide"
         :image="data.posterURL"
         @click="selectedFilmSubmitted(data.id, data.name, trailerSection)"
-
       >
       </vueper-slide>
     </vueper-slides>
@@ -131,10 +130,11 @@ h1 {
 .trailerSection {
   height: 25rem;
   background-color: #121212;
-
 }
 
 .vueper-slide {
+  margin-top: 0.3rem;
+  margin-bottom: 0.5rem;
   color: white;
   font-size: 1.5rem;
   text-transform: uppercase;
@@ -143,14 +143,14 @@ h1 {
   border-bottom: solid black 0.2rem;
   box-shadow: 0.1rem 0.1rem 1rem black;
   cursor: pointer;
-
+  transition: 2.5s;
 }
 
 .vueper-slide:hover {
-  
-
   border-right: solid pink 0.2rem;
   border-bottom: solid orange 0.2rem;
   box-shadow: 0.1rem 0.1rem 1rem orange;
+  transition: 0.3s;
 }
+
 </style>

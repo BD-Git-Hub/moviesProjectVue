@@ -130,6 +130,8 @@ h1 {
 }
 
 .vueper-slide {
+  margin-top: 0.3rem;
+  margin-bottom: 0.5rem;
   background-color: black;
   color: white;
   font-size: 1.5rem;
@@ -138,7 +140,7 @@ h1 {
   border-right: solid black 0.2rem;
   border-bottom: solid black 0.2rem;
   box-shadow: 0.1rem 0.1rem 0.1rem black;
-
+  transition: 3s;
   cursor: pointer;
 }
 
@@ -146,6 +148,8 @@ h1 {
   border-right: solid pink 0.2rem;
   border-bottom: solid orange 0.2rem;
   box-shadow: 0.1rem 0.1rem 1rem orange;
+  transition: 0.3s;
+
 }
 </style>
 

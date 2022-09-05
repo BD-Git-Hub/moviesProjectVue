@@ -19,25 +19,20 @@
         <option value="1">1</option>
       </select>
       <input type="text" v-model="userInput" placeholder="search a film..." />
-      <base-submit-button title="submit" class="submitBtn"/>
-
-     
+      <base-submit-button title="submit" class="submitBtn" />
     </form>
   </div>
 </template>
 
 <script>
-  import BaseSubmitButton from '../UI/BaseSubmitButton.vue'
+import BaseSubmitButton from "../UI/BaseSubmitButton.vue";
 
 export default {
   components: {
-    BaseSubmitButton
-
+    BaseSubmitButton,
   },
   setup() {
-    return {
-
-    }
+    return {};
   },
   inject: ["genresData"],
   emits: ["search-submitted"],
@@ -72,25 +67,18 @@ export default {
 .submitFormDiv {
   float: left;
   margin-top: 1rem;
-  
-
 }
-
-
-
 
 .genreSelect {
   font-size: 1.5rem;
   height: 3rem;
   cursor: pointer;
-
 }
 
 .ratingSelect {
   font-size: 1.5rem;
   height: 3rem;
   cursor: pointer;
-
 }
 
 input {
@@ -98,7 +86,6 @@ input {
   height: 2.8rem;
   font-size: 1.5rem;
   cursor: pointer;
-
 }
 
 .submitBtn {
@@ -108,16 +95,20 @@ input {
   cursor: pointer;
   text-decoration: none;
 
-	border: none;
-	padding-top: 0.6rem;
+  border: none;
+  padding-top: 0.6rem;
   padding-right: 1rem;
   padding-bottom: 0.6rem;
   padding-left: 1rem;
-	outline: inherit;
-  background-color: red;
+  outline: inherit;
+  background-color: orange;
+  transition: 1s;
+}
+.submitBtn:hover {
+  background-color: pink;
+  transition: 1s;
+
 
 
 }
-
-
 </style>
