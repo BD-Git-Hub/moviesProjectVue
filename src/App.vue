@@ -1,7 +1,7 @@
 <template>
   <div>
-    <the-navigation-bar @search-submitted="searchSubmitted"/>
-  
+    <the-navigation-bar @search-submitted="searchSubmitted" />
+
     <router-view @selected-film="selectedFilmSubmitted" />
   </div>
 </template>
@@ -9,7 +9,7 @@
 <script>
 import { computed } from "@vue/reactivity";
 import TheNavigationBar from "./components/layouts/TheNavigationBar.vue";
-import { getData, searchData } from "./fetch/fetchAPI";
+import { getData, searchData, findData } from "./fetch/fetchAPI";
 const APIURL = `https://api.themoviedb.org/3/`;
 const url = "https://image.tmdb.org/t/p/w500";
 const originalUrl = "https://image.tmdb.org/t/p/original/";
@@ -18,7 +18,7 @@ const genreList = "genre/movie/list";
 const topRated = "movie/top_rated";
 const trendingForDay = "trending/all/day";
 const searchMovie = "search/movie";
-const partOneMovie = "/movie/";
+const partOneMovie = "movie/";
 const genreSearchPartTwo = "/similar";
 const searchImages = "/images";
 const searchCredits = "/credits";
@@ -35,6 +35,12 @@ const requestData = async (searchParams, userParams) => {
   if (data[0].results.length === 0) {
     console.log("ERROR!");
   }
+
+  return data;
+};
+
+const findInfo = async (searchParams, userParams) => {
+  const data = await findData(APIURL + searchParams, userParams);
 
   return data;
 };
@@ -76,7 +82,7 @@ const convertDataToStoredData = (data, storedData) => {
       });
     }
 
-    if (dataArr[0].genres) {
+    if (dataArr[0].genres && !dataArr[0].original_title) {
       dataArr[0].genres.forEach((genreItem) => {
         storedData.push({
           id: genreItem.id,
@@ -116,6 +122,19 @@ const convertDataToStoredData = (data, storedData) => {
           name: creditsItem.name,
           character: creditsItem.character,
         });
+      });
+    }
+
+    if (dataArr[0].original_title) {
+      storedData.push({
+        name: dataArr[0].title,
+        id: dataArr[0].id,
+        description: dataArr[0].overview,
+        releaseDate: dataArr[0].release_date,
+        tagline: dataArr[0].tagline || null,
+        voteAverage: dataArr[0].vote_average,
+        genres: dataArr[0].genres,
+        language: dataArr[0].spoken_languages,
       });
     }
   });
@@ -199,6 +218,7 @@ export default {
       selectedFilmToggle: computed(() => this.selectedFilmToggle),
       submitSectionDisplay: computed(() => this.submitSectionDisplay),
       searchSubmitted: this.searchSubmitted,
+      selectedDataInfo: computed(() => this.selectedDataInfo),
     };
   },
   methods: {
@@ -248,6 +268,7 @@ export default {
       this.selectedDataImage = [];
       this.selectedDataCredits = [];
       this.selectedFilmName = "";
+      this.selectedDataInfo = [];
     },
     findGenre(chosenGenre, genreData) {
       let foundID = "";
@@ -267,7 +288,6 @@ export default {
         this.submitSectionDisplay = false;
       } else if (sectionName === "trailerSection") {
         this.selectedFilmToggle = true;
-
         this.submitSectionDisplay = false;
       } else if (sectionName === "submitClicked") {
         this.selectedFilmToggle = false;
@@ -278,8 +298,6 @@ export default {
       } else if (sectionName === "ratingsSection") {
         this.selectedFilmToggle = true;
         this.submitSectionDisplay = false;
-
-
       }
     },
     selectedFilmSubmitted(filmID, filmName, sectionName) {
@@ -288,7 +306,8 @@ export default {
 
       this.toggleDisplays(sectionName);
 
-      requestData(searchMovie, filmName);
+      const info = findInfo(partOneMovie, filmID);
+
 
       const selectedImageData = requestImagesAndCredits(
         partOneMovie,
@@ -304,6 +323,9 @@ export default {
 
       convertDataToStoredData(selectedImageData, this.selectedDataImage);
       convertDataToStoredData(selectedCreditsData, this.selectedDataCredits);
+      convertDataToStoredData(info, this.selectedDataInfo);
+
+
       this.selectedFilmName = filmName;
     },
   },
@@ -317,6 +339,7 @@ export default {
       searchData: [],
       selectedDataImage: [],
       selectedDataCredits: [],
+      selectedDataInfo: [],
       selectedFilmName: "",
       submitSectionDisplay: false,
       selectedFilmToggle: false,

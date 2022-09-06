@@ -2,13 +2,16 @@
   <div :style="containerDiv">
     <img :src="randomFilePath" />
 
-    <Teleport to="body">
+  
       <div class="selectedFilmDivGrp" v-if="selectedFilmToggle">
-        <img :src="randomFilePath" />
-        <h1>{{ selectedFilmName }}</h1>
-        <p>Rating</p>
-        <p>Description</p>
-        <div class="castDivGrp">
+        <div v-for="data in selectedDataInfo" :key="data.id">
+          <h1>{{ data.name }}</h1>
+          <p>{{data.voteAverage}}</p>
+          <button>More Info</button>
+          
+
+        </div>
+        <!-- <div class="castDivGrp">
           <div
             class="castGrpItem"
             v-for="credit in selectedDataCredits"
@@ -19,9 +22,9 @@
             <p class="castItem">Character:</p>
             <p class="castItem">{{ credit.character }}</p>
           </div>
-        </div>
+        </div> -->
       </div>
-    </Teleport>
+    
   </div>
 </template>
 
@@ -44,7 +47,7 @@ export default {
       },
     };
   },
-  inject: ["selectedDataImage", "selectedDataCredits", "selectedFilmName", "selectedFilmToggle"],
+  inject: ["selectedDataImage", "selectedDataCredits", "selectedFilmName", "selectedFilmToggle", "selectedDataInfo"],
 
   computed: {
     randomFilePath() {
@@ -79,20 +82,19 @@ export default {
 <style>
 .selectedFilmDivGrp {
   color: white;
-  background-color: rgba(120, 120, 120, 0.3);
+  background-color: rgba(120, 120, 120, 0.7);
   position: absolute;
-  bottom: -13%;
-  width: 70vw;
-  height: 61rem;
-  margin-left: 15vw;
-  margin-right: 15vw;
+  top: 75%;
+  left: 2vw;
+  width: auto;
+  height: 10rem;
   overflow: hidden;
 }
 
 h1 {
   text-transform: uppercase;
   z-index: 20;
-  font-size: 2vmax;
+  font-size: 2.5vmax;
 }
 
 img {
