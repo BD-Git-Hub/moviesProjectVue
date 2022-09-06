@@ -230,7 +230,6 @@ export default {
       this.clearSearchData();
       this.clearSelectedData();
 
-      console.log(selectedGenre);
 
       let searchData = [];
       const ratingNumber = selectedRating;
@@ -309,6 +308,9 @@ export default {
       const info = findInfo(partOneMovie, filmID);
 
 
+      
+
+
       const selectedImageData = requestImagesAndCredits(
         partOneMovie,
         filmID,
@@ -320,6 +322,8 @@ export default {
         filmID,
         searchCredits
       );
+
+      console.log(selectedCreditsData);
 
       convertDataToStoredData(selectedImageData, this.selectedDataImage);
       convertDataToStoredData(selectedCreditsData, this.selectedDataCredits);

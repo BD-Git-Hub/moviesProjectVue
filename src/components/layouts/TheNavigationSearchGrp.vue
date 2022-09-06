@@ -102,6 +102,8 @@ input {
   color: white;
 }
 
+
+
 .submitBtn {
   height: 3.15rem;
   font-size: 1.5rem;
@@ -115,11 +117,36 @@ input {
   background-color: black;
   border-radius: 0rem 0.5rem 0.5rem 0;
   border: 1px solid grey;
-  transition: 1s;
+  /* transition: 1s; */
 }
 
-.submitBtn:hover {
+/* .submitBtn:hover {
   box-shadow: 0.1rem 0.1rem 1rem orange;
   transition: 1s;
+} */
+
+.genreSelect, .ratingSelect, input, .submitBtn {
+  transition: 1s;
+
 }
+
+.genreSelect:hover, .ratingSelect:hover, input:hover, .submitBtn:hover {
+  box-shadow: 0.1rem 0.1rem 1rem orange;
+  transition: 1s;
+
+}
+
+.genreSelect:focus, .genreSelect:focus, .ratingSelect:focus, input:focus, .submitBtn:focus {
+  outline: orange;
+  border-color: orange;
+
+}
+
+.genreSelect option:focus {
+  background-color: orange;
+}
+
+
+
+
 </style>
