@@ -1,7 +1,7 @@
 <template>
   <div>
-    <the-navigation-bar @search-submitted="searchSubmitted">
-    </the-navigation-bar>
+    <the-navigation-bar @search-submitted="searchSubmitted"/>
+  
     <router-view @selected-film="selectedFilmSubmitted" />
   </div>
 </template>
@@ -198,6 +198,7 @@ export default {
       selectedFilmSubmitted: this.selectedFilmSubmitted,
       selectedFilmToggle: computed(() => this.selectedFilmToggle),
       submitSectionDisplay: computed(() => this.submitSectionDisplay),
+      searchSubmitted: this.searchSubmitted,
     };
   },
   methods: {
@@ -208,6 +209,9 @@ export default {
     searchSubmitted(selectedGenre, selectedRating, userInput) {
       this.clearSearchData();
       this.clearSelectedData();
+
+      console.log(selectedGenre);
+
       let searchData = [];
       const ratingNumber = selectedRating;
       const submitClicked = "submitClicked";

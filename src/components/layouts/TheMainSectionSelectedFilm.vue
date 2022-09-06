@@ -1,11 +1,27 @@
 <template>
   <div :style="containerDiv">
     <img :src="randomFilePath" />
-    <div class="titleDivGrp">
-      <h1>{{ selectedFilmName }}</h1>
-      <p>Rating</p>
-      <p>Description</p>
-    </div>
+
+    <Teleport to="body">
+      <div class="selectedFilmDivGrp" v-if="selectedFilmToggle">
+        <img :src="randomFilePath" />
+        <h1>{{ selectedFilmName }}</h1>
+        <p>Rating</p>
+        <p>Description</p>
+        <div class="castDivGrp">
+          <div
+            class="castGrpItem"
+            v-for="credit in selectedDataCredits"
+            :key="credit.name"
+          >
+            <p class="castItem">Real name:</p>
+            <p class="castItem">{{ credit.name }}</p>
+            <p class="castItem">Character:</p>
+            <p class="castItem">{{ credit.character }}</p>
+          </div>
+        </div>
+      </div>
+    </Teleport>
   </div>
 </template>
 
@@ -24,12 +40,12 @@ export default {
         backgroundRepeat: "no-repeat",
         display: "inline-block",
         zIndex: "0",
-  overflow: "hidden"
-        
+        overflow: "hidden",
       },
     };
   },
-  inject: ["selectedDataImage", "selectedDataCredits", "selectedFilmName"],
+  inject: ["selectedDataImage", "selectedDataCredits", "selectedFilmName", "selectedFilmToggle"],
+
   computed: {
     randomFilePath() {
       const maxImageSizeArr = [];
@@ -61,14 +77,16 @@ export default {
 </script>
 
 <style>
-.titleDivGrp {
+.selectedFilmDivGrp {
   color: white;
   background-color: rgba(120, 120, 120, 0.3);
-  width: auto;
   position: absolute;
-  bottom: 20%;
-  left: 5%;
-  border-radius: 1rem;
+  bottom: -13%;
+  width: 70vw;
+  height: 61rem;
+  margin-left: 15vw;
+  margin-right: 15vw;
+  overflow: hidden;
 }
 
 h1 {
@@ -81,5 +99,27 @@ img {
   width: 100%;
   height: auto;
   min-width: 20rem;
+}
+
+.castDivGrp {
+  position: absolute;
+  background-color: rgba(120, 120, 120, 0.7);
+  height: 13vh;
+  width: 40%;
+  bottom: 0%;
+  left: 0%;
+  overflow: hidden;
+}
+
+.castGrpItem {
+  background-color: red;
+  width: 10vw;
+  display: inline-block;
+  margin: 0.5rem;
+}
+
+.castItem {
+  color: white;
+  font-size: 1.2vw;
 }
 </style>

@@ -19,6 +19,8 @@
         :key="data.id"
         :title="data.name"
         class="vueper-slide"
+        @click="searchSubmitted(data.name, 10, )"
+
       >
       </vueper-slide>
     </vueper-slides>
@@ -31,7 +33,7 @@ import "vueperslides/dist/vueperslides.css";
 
 export default {
   props: ["title"],
-  inject: ["genresData"],
+  inject: ["genresData", "searchSubmitted"],
   components: {
     VueperSlides,
     VueperSlide,

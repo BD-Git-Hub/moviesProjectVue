@@ -1,6 +1,7 @@
 <template>
   <div class="submitFormDiv">
     <form @submit.prevent="searchSubmit">
+      <input type="text" v-model="userInput" placeholder="search a film..." />
       <select name="Genre" v-model="selectedGenre" class="genreSelect">
         <option v-for="data in genresData" :key="data.id" :value="data.name">
           {{ data.name }}
@@ -18,7 +19,7 @@
         <option value="2">2</option>
         <option value="1">1</option>
       </select>
-      <input type="text" v-model="userInput" placeholder="search a film..." />
+
       <base-submit-button title="submit" class="submitBtn" />
     </form>
   </div>
@@ -70,45 +71,55 @@ export default {
 }
 
 .genreSelect {
-  font-size: 1.5rem;
-  height: 3rem;
   cursor: pointer;
+  width: 10vw;
+  min-width: 5.7rem;
+  background-color: #252525;
+  color: white;
+  font-size: 1.4rem;
+  height: 3.19rem;
+  border: 1px solid grey;
 }
 
 .ratingSelect {
-  font-size: 1.5rem;
-  height: 3rem;
   cursor: pointer;
+  font-size: 1.4rem;
+  height: 3.19rem;
+  background-color: #252525;
+  color: white;
+  text-decoration: none;
+  border: 1px solid grey;
 }
 
 input {
-  width: 30%;
-  height: 2.8rem;
-  font-size: 1.5rem;
+  width: 40%;
   cursor: pointer;
+  font-size: 1.5rem;
+  height: 3.05rem;
+  border-radius: 0.5rem 0rem 0rem 0.5rem;
+  background-color: #252525;
+  border: 1px solid grey;
+  color: white;
 }
 
 .submitBtn {
+  height: 3.15rem;
   font-size: 1.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
   color: white;
-  background-color: #252525;
   cursor: pointer;
   text-decoration: none;
-
   border: none;
-  padding-top: 0.6rem;
-  padding-right: 1rem;
-  padding-bottom: 0.6rem;
-  padding-left: 1rem;
   outline: inherit;
-  background-color: orange;
+  background-color: black;
+  border-radius: 0rem 0.5rem 0.5rem 0;
+  border: 1px solid grey;
   transition: 1s;
 }
+
 .submitBtn:hover {
-  background-color: pink;
+  box-shadow: 0.1rem 0.1rem 1rem orange;
   transition: 1s;
-
-
-
 }
 </style>
