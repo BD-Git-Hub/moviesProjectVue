@@ -1,5 +1,5 @@
 <template>
-  <div :style="containerDiv">
+  <div :style="containerDiv" class="containerDiv">
     <img :src="randomFilePath" />
 
     <div class="selectedFilmDivGrp" v-if="selectedFilmToggle && !modalDisplay">
@@ -77,6 +77,7 @@ export default {
         width: "100%",
         minWidth: "36rem",
         maxWidth: "100%",
+        top: "20%",
         backgroundColor: "black",
         backgroundSize: "100% 100%",
         backgroundRepeat: "no-repeat",
@@ -205,10 +206,11 @@ img {
 .modelDiv {
   position: absolute;
   background-color: #121212;
-  height: 100%;
+  height: 100vh;
   width: 40vw;
   margin-left: 30vw;
   margin-right: 30vw;
+  border-radius: 1rem;
 
   overflow: hidden;
 }

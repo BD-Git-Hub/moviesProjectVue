@@ -1,6 +1,6 @@
 <template>
   <div>
-    <the-navigation-bar @search-submitted="searchSubmitted" />
+    <!-- <the-navigation-bar @search-submitted="searchSubmitted" /> -->
 
     <router-view @selected-film="selectedFilmSubmitted" />
   </div>
@@ -8,7 +8,7 @@
 
 <script>
 import { computed } from "@vue/reactivity";
-import TheNavigationBar from "./components/layouts/TheNavigationBar.vue";
+// import TheNavigationBar from "./components/layouts/TheNavigationBar.vue";
 import { getData, searchData, findData } from "./fetch/fetchAPI";
 const APIURL = `https://api.themoviedb.org/3/`;
 const url = "https://image.tmdb.org/t/p/w500";
@@ -196,7 +196,7 @@ const cutOffToMaxRatingNumber = (arr, ratingNumber) => {
 };
 
 export default {
-  components: { TheNavigationBar },
+  // components: { TheNavigationBar },
   mounted() {
     const trailersData = dataRetrieval(upcomingMovie);
     const genreData = dataRetrieval(genreList);
