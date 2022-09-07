@@ -5,14 +5,14 @@
     <div class="selectedFilmDivGrp" v-if="selectedFilmToggle && !modalDisplay">
       <div v-for="data in selectedDataInfo" :key="data.id">
         <h1 class="selectedFilmh1">{{ data.name }}</h1>
-        <p>{{ data.voteAverage.toFixed(1) }}</p>
-        <button @click="toggleMoreInfoModel">More Info</button>
+        <p class="selectedFilmP">{{ data.voteAverage.toFixed(1) }}</p>
+        <base-button class="moreInfoBtn" @click="toggleMoreInfoModel">More Info</base-button>
       </div>
     </div>
     <Teleport to=".backdropContainer" v-else>
       <div class="backdrop" @click="toggleMoreInfoModel">
         <div class="modelDiv">
-          <base-button class="closeBtn" @click="toggleMoreInfoModel"
+          <base-button class="closeBtn" @click="closeModel"
             >X</base-button
           >
           <img :src="randomFilePath" class="modelImg" />
@@ -26,7 +26,7 @@
               <h1 class="modelh1">{{ data.name }}</h1>
               <p class="modelInfoRating">{{ data.voteAverage.toFixed(1) }}</p>
               <p class="modelInfoGenre" v-if="data.genres[0].name">
-                {{ data.genres[0].name }}
+                | {{ data.genres[0].name }}
               </p>
               <p v-else-if="data.genres[1].name">{{ data.genres[1].name }}</p>
               <p v-else-if="data.genres[2].name">{{ data.genres[2].name }}</p>
@@ -38,10 +38,10 @@
                   v-for="data in selectedDataCredits"
                   :key="data.id"
                 >
-                  <p>character name:</p>
-                  <p>{{ data.name }}</p>
-                  <p>Played by:</p>
-                  <p>{{ data.character }}</p>
+                  <p class="characterLabel">character:</p>
+                  <p class="characterLabelInfo">{{ data.character }}</p>
+                  <p class="characterLabel">name:</p>
+                  <p class="characterLabelInfo">{{ data.name }}</p>
                 </div>
               </div>
             </div>
@@ -64,6 +64,9 @@ export default {
       console.log(this.modalDisplay);
       this.modalDisplay = !this.modalDisplay;
     },
+    closeModel() {
+      this.toggleMoreInfoModel
+    }
   },
   data() {
     return {
@@ -77,8 +80,6 @@ export default {
         backgroundColor: "black",
         backgroundSize: "100% 100%",
         backgroundRepeat: "no-repeat",
-        display: "inline-block",
-        zIndex: "0",
         overflow: "hidden",
       },
     };
@@ -122,23 +123,54 @@ export default {
 </script>
 
 <style>
+.selectedFilmImgAnimation {
+  animation: mover 5s infinite alternate;
+}
+
+@keyframes mover {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-20px);
+  }
+}
+
 .selectedFilmDivGrp {
   color: white;
-  background-color: rgba(120, 120, 120, 0.7);
+  background-color: rgba(0, 0, 0, 0.4);
   position: absolute;
-  top: 75%;
+  bottom: 5%;
   left: 2vw;
-  width: auto;
-  height: 10rem;
-  overflow: hidden;
+  width: 20vw;
+  min-width: 30vw;
+  height: auto;
+  border-radius: 1rem;
+  transition: 1s;
+  
+  
+}
+
+.selectedFilmDivGrp:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+  transition: 1s;
+
+
+
 }
 
 .selectedFilmh1 {
+  margin: 0.5rem;
   text-transform: uppercase;
   z-index: 20;
   font-size: 2.5vmax;
 }
 
+.selectedFilmP {
+  font-size: 2.5vmax;
+
+
+}
 img {
   width: 100%;
   height: 100%;
@@ -149,13 +181,12 @@ img {
   position: absolute;
   width: 100%;
   height: 114%;
-  background-color: rgba(120, 120, 120, 0.9);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .closeBtn {
   position: absolute;
   right: 1rem;
-
   color: rgb(235, 235, 235);
   background: transparent;
   border: none;
@@ -173,8 +204,7 @@ img {
 
 .modelDiv {
   position: absolute;
-  background-color: rgba(75, 75, 75);
-
+  background-color: #121212;
   height: 100%;
   width: 40vw;
   margin-left: 30vw;
@@ -184,16 +214,32 @@ img {
 }
 
 .modelImg {
-  height: 100%;
-  max-height: 100%;
+  min-height: 40rem;
   width: 100%;
+  min-width: 30rem;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  height: auto;
+
+
 }
 
 .modelInfoContainer {
   position: absolute;
   top: 40%;
   height: 10%;
-  background-image: linear-gradient(180deg, transparent, rgb(53, 53, 53));
+  background-image: linear-gradient(180deg, transparent, #121212);
+}
+
+.modelInfoGrp {
+  position: relative;
+  top: 100%;
+  height: 100vh;
+  color: white;
+  background-color: #121212;
+  display: inline-block
+
+  
 }
 
 .modelh1 {
@@ -203,44 +249,49 @@ img {
   font-size: 2.8vmax;
 }
 
-.modelInfoGrp {
-  position: relative;
-  top: 100%;
-  height: 100vh;
-  color: white;
-  background-color: rgb(53, 53, 53);
-}
-
 .modelInfoGrp > p {
   display: inline-block;
-  font-size: 1.5vw;
-}
+  
+} 
 
 .modelInfoRating,
 .modelInfoGenre {
   color: orange;
   font-size: 2.5vw;
   margin: 0.5rem;
-  background-color: rgb(75, 75, 75);
-  border-radius: 0.5rem;
+  border-radius: 0.3rem;
 }
 
 .modalInfoDescription {
-  font-size: 1.5vw;
+  font-size: 1vw;
+  
 }
 
 .charactersInfoGrp {
-  background-color: orange;
+  margin-top: 1rem;
   height: 16rem;
-  width: inherit;
   overflow: hidden;
+  
+  
 }
 
 .CharacterInfoItem {
-  width: 10%;
-  background-color: red;
-  margin: 0.5rem;
+  width: 7.4vw;
+  margin: 0.3vmin;
+  background-color: rgb(75, 75, 75);
+  border-radius: 0.3rem;
   text-align: center;
-  display: inline-block;
+  min-height: 70%;
+  float: left;
+  
+}
+
+.characterLabel {
+  font-size: 1vw;
+  color: orange
+}
+
+.characterLabelInfo {
+  font-size: 1.2vw;
 }
 </style>

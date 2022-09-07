@@ -117,11 +117,15 @@ const convertDataToStoredData = (data, storedData) => {
     }
 
     if (dataArr[0].cast) {
-      dataArr[0].cast.forEach((creditsItem) => {
-        storedData.push({
-          name: creditsItem.name,
-          character: creditsItem.character,
-        });
+      dataArr[0].cast.forEach((creditsItem, index) => {
+        if (index < 5) {
+          storedData.push({
+            name: creditsItem.name,
+            character: creditsItem.character,
+          });
+        }
+
+        console.log(storedData);
       });
     }
 
@@ -230,7 +234,6 @@ export default {
       this.clearSearchData();
       this.clearSelectedData();
 
-
       let searchData = [];
       const ratingNumber = selectedRating;
       const submitClicked = "submitClicked";
@@ -307,10 +310,6 @@ export default {
 
       const info = findInfo(partOneMovie, filmID);
 
-
-      
-
-
       const selectedImageData = requestImagesAndCredits(
         partOneMovie,
         filmID,
@@ -323,12 +322,9 @@ export default {
         searchCredits
       );
 
-      console.log(selectedCreditsData);
-
       convertDataToStoredData(selectedImageData, this.selectedDataImage);
       convertDataToStoredData(selectedCreditsData, this.selectedDataCredits);
       convertDataToStoredData(info, this.selectedDataInfo);
-
 
       this.selectedFilmName = filmName;
     },

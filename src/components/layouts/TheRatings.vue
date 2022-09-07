@@ -2,7 +2,7 @@
   <div class="ratingSection">
     <h1>{{ title }}</h1>
     <vueper-slides
-      class="no-shadow"
+      class="no-shadow vueper-slides__bullet"
       :breakpoints="breakpoints"
       :visible-slides="5"
       :slide-multiple="true"
@@ -17,7 +17,7 @@
       <vueper-slide
         v-for="data in ratingsData"
         :key="data.id"
-        class="vueper-slide"
+        class="vueper-slide vueper-slide__title"
         :image="data.posterURL"
         :content="data.voteAverage.toString()"
         @click="selectedFilmSubmitted(data.id, data.name, ratingsSection)"
@@ -133,6 +133,7 @@ h1 {
 
 }
 
+
 .vuper-Text {
   color: red;
 }
@@ -157,7 +158,11 @@ h1 {
   border-right: solid pink 0.2rem;
   border-bottom: solid orange 0.2rem;
   box-shadow: 0.1rem 0.1rem 1rem orange;
-  transition: 0.3s;
-
+  transition: 0.3s;  
 }
+.vueper-slide__title {
+  font-size: 3rem;
+}
+
+.vueper-slides__bullet {color: orange}
 </style>
