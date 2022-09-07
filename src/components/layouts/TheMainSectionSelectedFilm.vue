@@ -6,14 +6,14 @@
       <div v-for="data in selectedDataInfo" :key="data.id">
         <h1 class="selectedFilmh1">{{ data.name }}</h1>
         <p class="selectedFilmP">{{ data.voteAverage.toFixed(1) }}</p>
-        <base-button class="moreInfoBtn" @click="toggleMoreInfoModel">More Info</base-button>
+        <base-button class="moreInfoBtn" @click="toggleMoreInfoModel" title="More Info"></base-button>
       </div>
     </div>
     <Teleport to=".backdropContainer" v-else>
       <div class="backdrop" @click="toggleMoreInfoModel">
         <div class="modelDiv">
-          <base-button class="closeBtn" @click="closeModel"
-            >X</base-button
+          <base-button class="closeBtn" @click="closeModel" title="X"
+            ></base-button
           >
           <img :src="randomFilePath" class="modelImg" />
 
@@ -58,10 +58,9 @@ import baseButton from "../UI/BaseButton.vue";
 export default {
   components: {
     baseButton,
-  },
+},
   methods: {
     toggleMoreInfoModel() {
-      console.log(this.modalDisplay);
       this.modalDisplay = !this.modalDisplay;
     },
     closeModel() {

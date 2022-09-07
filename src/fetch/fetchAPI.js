@@ -11,13 +11,15 @@ export const getData = async (APIURL) => {
         return response.json();
       } else {
         throw new Error(`An Error has occurred ${response.status}`);
+
+        
       }
     })
     .then((data) => {
       movies.push(data);
     })
     .catch((error) => {
-      console.log(error);
+      console.log(error + "AN ERROR HAS HAPPENED!");
       return "AN ERROR HAS OCCURED!"
     });
 
@@ -28,7 +30,7 @@ export const searchData = async (APIURL, userParams) => {
   let movies = [];
   const query = "&query=";
 
-  console.log(`${APIURL}${APIKey}${query}${userParams}`)
+  // console.log(`${APIURL}${APIKey}${query}${userParams}`)
 
   await fetch(`${APIURL}${APIKey}${query}${userParams}`)
     .then((response) => {

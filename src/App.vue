@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- <the-navigation-bar @search-submitted="searchSubmitted" /> -->
+    <the-navigation-bar @search-submitted="searchSubmitted" />
 
     <router-view @selected-film="selectedFilmSubmitted" />
   </div>
@@ -8,7 +8,7 @@
 
 <script>
 import { computed } from "@vue/reactivity";
-// import TheNavigationBar from "./components/layouts/TheNavigationBar.vue";
+import TheNavigationBar from "./components/layouts/TheNavigationBar.vue";
 import { getData, searchData, findData } from "./fetch/fetchAPI";
 const APIURL = `https://api.themoviedb.org/3/`;
 const url = "https://image.tmdb.org/t/p/w500";
@@ -32,9 +32,7 @@ const dataRetrieval = async (searchParams) => {
 const requestData = async (searchParams, userParams) => {
   const data = await searchData(APIURL + searchParams, userParams);
 
-  if (data[0].results.length === 0) {
-    console.log("ERROR!");
-  }
+ 
 
   return data;
 };
@@ -124,8 +122,6 @@ const convertDataToStoredData = (data, storedData) => {
             character: creditsItem.character,
           });
         }
-
-        console.log(storedData);
       });
     }
 
@@ -196,7 +192,7 @@ const cutOffToMaxRatingNumber = (arr, ratingNumber) => {
 };
 
 export default {
-  // components: { TheNavigationBar },
+  components: { TheNavigationBar },
   mounted() {
     const trailersData = dataRetrieval(upcomingMovie);
     const genreData = dataRetrieval(genreList);
@@ -226,6 +222,7 @@ export default {
     };
   },
   methods: {
+    
     randomFilmNumber() {
       const randomNumber = Math.floor(Math.random() * 20);
       return randomNumber;
@@ -310,18 +307,22 @@ export default {
 
       const info = findInfo(partOneMovie, filmID);
 
+      
       const selectedImageData = requestImagesAndCredits(
         partOneMovie,
         filmID,
         searchImages
-      );
+        );
+        
+        const selectedCreditsData = requestImagesAndCredits(
+          partOneMovie,
+          filmID,
+          searchCredits
+          );
 
-      const selectedCreditsData = requestImagesAndCredits(
-        partOneMovie,
-        filmID,
-        searchCredits
-      );
-
+      
+          
+      
       convertDataToStoredData(selectedImageData, this.selectedDataImage);
       convertDataToStoredData(selectedCreditsData, this.selectedDataCredits);
       convertDataToStoredData(info, this.selectedDataInfo);

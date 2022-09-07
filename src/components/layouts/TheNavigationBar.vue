@@ -31,7 +31,7 @@ export default {
 <style scoped>
 .container {
   height: 9vh;
-  background:  transparent;
+  background:  black;
   margin-inline: auto;
   width: 100%;
 }
