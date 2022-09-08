@@ -1,7 +1,11 @@
 <template>
   <div :class="navToggle ? 'container-enlarged' : 'container'">
     <div class="nav-menu">
-      <base-button title="Enlarge" @click="toggleNavContent" class="enlargeBtn"></base-button>
+      <base-button
+        title="Enlarge"
+        @click="toggleNavContent"
+        class="enlargeBtn"
+      ></base-button>
     </div>
     <the-navigation-group />
     <the-navigation-search-group @search-submitted="searchSubmitted" />
@@ -45,14 +49,30 @@ export default {
 }
 
 .container-enlarged {
-  height: 45vh;
-  background: pink;
+  height: auto;
+  background: black;
   transition: 0.7s;
+  border-bottom: orange solid 0.1rem;
+  
+
 }
 
 .nav-menu {
   display: none;
   justify-content: center;
+}
+
+.itemsDisplayed {
+  display: block;
+}
+
+@media only screen and (min-width: 820px) {
+  .container-enlarged {
+    height: 11vh;
+    background: black;
+    transition: 0.7s;
+    border-bottom: orange solid 0.1rem;
+  }
 }
 
 @media only screen and (max-width: 820px) {
@@ -63,8 +83,10 @@ export default {
 
   .enlargeBtn {
     width: 83%;
+  }
 
-
+  .itemsDisplayed {
+    display: none;
   }
 }
 </style>

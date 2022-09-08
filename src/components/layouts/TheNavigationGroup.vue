@@ -18,6 +18,14 @@ export default {
 </script>
 
 <style scoped>
+
+@media only screen and (min-width: 821px) {
+
+.watchlistBtn, .homeBtn {
+  float: right;
+}
+
+}  
 @media only screen and (max-width: 820px) {
   .watchlistBtn {
     width: 83%;

@@ -8,7 +8,9 @@
     >
     <a href="https://vuejs.org/"><p>Vue.js</p></a>
     <a href="https://bovin-desouza.co.uk/"><p>© Bovin De Souza</p></a>
-    <a href="npmjs.com/package/fa-icons">fa-icons</a>
+    <a href="npmjs.com/package/fa-icons"><p>fa-icons
+
+    </p></a>
   </div>
 </template>
 
@@ -19,7 +21,7 @@
 }
 
 p {
-  font-size: 1.9vw;
+  font-size: 3vmin;
   display: inline;
   margin: 1.5rem 1rem 1.5rem 1rem;
   color: white;

@@ -67,6 +67,7 @@ export default {
 <style scoped>
 .submitFormDiv {
   margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .genreSelect {
@@ -144,13 +145,17 @@ input:focus,
   background-color: orange;
 }
 
-
-@media only screen and (min-width: 556px) {
-
+@media only screen and (min-width: 821px) {
   .submitFormDiv {
-  float: left;
+    float: left;
+  }
 }
 
+@media only screen and (min-width: 556px) and (max-width: 820px) {
+  .submitFormDiv {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 @media only screen and (max-width: 556px) {
@@ -177,8 +182,6 @@ input:focus,
     border-radius: 0.5rem;
     width: 20vw;
     margin-right: auto;
-
-
   }
 
   .submitBtn {
@@ -186,18 +189,8 @@ input:focus,
     margin-left: auto;
     margin-right: auto;
     border-radius: 0.5rem;
-
   }
 
-  /* input {
-  width: 40%;
-  cursor: pointer;
-  font-size: 1.5rem;
-  height: 3.05rem;
-  border-radius: 0.5rem 0rem 0rem 0.5rem;
-  background-color: #252525;
-  border: 1px solid grey;
-  color: white;
-} */
+  
 }
 </style>
