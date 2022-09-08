@@ -66,7 +66,6 @@ export default {
 
 <style scoped>
 .submitFormDiv {
-  float: left;
   margin-top: 1rem;
 }
 
@@ -93,7 +92,7 @@ export default {
 
 input {
   width: 40%;
-  cursor: pointer;
+  cursor: text;
   font-size: 1.5rem;
   height: 3.05rem;
   border-radius: 0.5rem 0rem 0rem 0.5rem;
@@ -101,8 +100,6 @@ input {
   border: 1px solid grey;
   color: white;
 }
-
-
 
 .submitBtn {
   height: 3.15rem;
@@ -117,29 +114,30 @@ input {
   background-color: black;
   border-radius: 0rem 0.5rem 0.5rem 0;
   border: 1px solid grey;
-  /* transition: 1s; */
 }
 
-/* .submitBtn:hover {
+.genreSelect,
+.ratingSelect,
+input,
+.submitBtn {
+  transition: 1s;
+}
+
+.genreSelect:hover,
+.ratingSelect:hover,
+input:hover,
+.submitBtn:hover {
   box-shadow: 0.1rem 0.1rem 1rem orange;
   transition: 1s;
-} */
-
-.genreSelect, .ratingSelect, input, .submitBtn {
-  transition: 1s;
-
 }
 
-.genreSelect:hover, .ratingSelect:hover, input:hover, .submitBtn:hover {
-  box-shadow: 0.1rem 0.1rem 1rem orange;
-  transition: 1s;
-
-}
-
-.genreSelect:focus, .genreSelect:focus, .ratingSelect:focus, input:focus, .submitBtn:focus {
+.genreSelect:focus,
+.genreSelect:focus,
+.ratingSelect:focus,
+input:focus,
+.submitBtn:focus {
   outline: orange;
   border-color: orange;
-
 }
 
 .genreSelect option:focus {
@@ -147,6 +145,59 @@ input {
 }
 
 
+@media only screen and (min-width: 556px) {
+
+  .submitFormDiv {
+  float: left;
+}
+
+}
+
+@media only screen and (max-width: 556px) {
+  input {
+    display: flex;
+    justify-content: center;
+    width: 80vw;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 0.5rem;
+  }
+
+  .genreSelect {
+    margin: 0.1rem;
+    display: inline-flex;
+    justify-content: center;
+    width: 60vw;
+    border-radius: 0.5rem;
+    margin-left: auto;
+  }
+
+  .ratingSelect {
+    justify-content: center;
+    border-radius: 0.5rem;
+    width: 20vw;
+    margin-right: auto;
 
 
+  }
+
+  .submitBtn {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 0.5rem;
+
+  }
+
+  /* input {
+  width: 40%;
+  cursor: pointer;
+  font-size: 1.5rem;
+  height: 3.05rem;
+  border-radius: 0.5rem 0rem 0rem 0.5rem;
+  background-color: #252525;
+  border: 1px solid grey;
+  color: white;
+} */
+}
 </style>

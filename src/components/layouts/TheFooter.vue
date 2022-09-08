@@ -8,6 +8,7 @@
     >
     <a href="https://vuejs.org/"><p>Vue.js</p></a>
     <a href="https://bovin-desouza.co.uk/"><p>© Bovin De Souza</p></a>
+    <a href="npmjs.com/package/fa-icons">fa-icons</a>
   </div>
 </template>
 
