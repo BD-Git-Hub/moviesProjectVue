@@ -46,13 +46,16 @@ export default {
   background: black;
   transition: 0.7s;
   border-bottom: orange solid 0.1rem;
+  transition: 1s;
+
 }
 
 .container-enlarged {
   height: auto;
   background: black;
   transition: 0.7s;
-  border-bottom: orange solid 0.1rem;
+  border-bottom: pink solid 0.1rem;
+  transition: 1s;
 }
 
 .nav-menu {

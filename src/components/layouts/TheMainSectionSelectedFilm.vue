@@ -153,7 +153,7 @@ export default {
   margin: 0.5rem;
   text-transform: uppercase;
   z-index: 20;
-  font-size: 2.5vmax;
+  font-size: 4vmin;
 }
 
 .selectedFilmP {

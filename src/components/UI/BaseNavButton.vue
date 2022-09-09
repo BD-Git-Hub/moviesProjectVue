@@ -25,6 +25,7 @@ export default {
 
 <style scoped>
 button {
+  margin: 1rem;
   font-size: 1.5rem;
   color: white;
   background-color: #252525;
