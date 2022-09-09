@@ -7,8 +7,8 @@
         class="enlargeBtn"
       ></base-button>
     </div>
-    <the-navigation-group />
-    <the-navigation-search-group @search-submitted="searchSubmitted" />
+    <the-navigation-group :class="navToggle ? 'showItems' : 'hideItems' "/>
+    <the-navigation-search-group @search-submitted="searchSubmitted" :class="navToggle ? 'showItems' : 'hideItems' "/>
   </div>
 </template>
 
@@ -53,8 +53,6 @@ export default {
   background: black;
   transition: 0.7s;
   border-bottom: orange solid 0.1rem;
-  
-
 }
 
 .nav-menu {
@@ -62,8 +60,15 @@ export default {
   justify-content: center;
 }
 
-.itemsDisplayed {
+.showItems {
   display: block;
+ 
+
+}
+
+.hideItems {
+  display: none;
+  
 }
 
 @media only screen and (min-width: 820px) {
@@ -72,6 +77,10 @@ export default {
     background: black;
     transition: 0.7s;
     border-bottom: orange solid 0.1rem;
+  }
+
+  .hideItems {
+    display: block;
   }
 }
 
@@ -83,10 +92,6 @@ export default {
 
   .enlargeBtn {
     width: 83%;
-  }
-
-  .itemsDisplayed {
-    display: none;
   }
 }
 </style>
