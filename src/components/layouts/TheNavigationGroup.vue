@@ -1,8 +1,8 @@
 <template>
   <div>
-    <router-link to="/watchlist"
+    <!-- <router-link to="/watchlist"
       ><base-nav-button title="Watchlist" class="watchlistBtn"
-    /></router-link>
+    /></router-link> -->
     <router-link to="/home"
       ><base-nav-button title="Home" class="homeBtn"
     /></router-link>
