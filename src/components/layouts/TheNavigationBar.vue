@@ -46,7 +46,9 @@ export default {
   background: black;
   transition: 0.7s;
   border-bottom: orange solid 0.1rem;
+  
 }
+
 
 .container-enlarged {
   height: auto;
