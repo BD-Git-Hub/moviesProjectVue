@@ -52,7 +52,7 @@ export default {
   height: auto;
   background: black;
   transition: 0.7s;
-  border-bottom: pink solid 0.1rem;
+  border-bottom: orange solid 0.1rem;
 }
 
 .nav-menu {
