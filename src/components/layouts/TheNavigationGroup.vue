@@ -27,7 +27,7 @@ export default {
 @media only screen and (max-width: 820px) {
   .watchlistBtn {
     width: 83%;
-    margin: 2.5rem 0.5rem 0.5rem 0.5rem;
+    margin: 0.5rem;
   }
 
   .homeBtn {
