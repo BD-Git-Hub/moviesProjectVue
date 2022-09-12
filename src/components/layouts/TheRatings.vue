@@ -165,4 +165,5 @@ h1 {
 }
 
 .vueper-slides__bullet {color: orange}
+
 </style>

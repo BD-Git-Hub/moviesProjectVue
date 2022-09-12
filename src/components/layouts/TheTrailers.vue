@@ -2,7 +2,8 @@
   <div class="trailerSection">
     <h1>{{ title }}</h1>
     <vueper-slides
-      class="no-shadow vueper-slides__bullet"
+    
+      class="no-shadow vueper-slides__bullet vueper-slides__arrow"
       :breakpoints="breakpoints"
       :visible-slides="5"
       :slide-multiple="true"
@@ -154,6 +155,7 @@ h1 {
 }
 
 .vueper-slides__bullet {color: orange}
+
 
 
 

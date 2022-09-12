@@ -81,6 +81,8 @@ export default {
   border: 1px solid grey;
 }
 
+
+
 .ratingSelect {
   cursor: pointer;
   font-size: 1.4rem;
@@ -90,6 +92,9 @@ export default {
   text-decoration: none;
   border: 1px solid grey;
 }
+
+
+
 
 input {
   width: 40%;

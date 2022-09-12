@@ -2,7 +2,7 @@
   <div :class="navToggle ? 'container-enlarged' : 'container'">
     <div class="nav-menu">
       <base-button
-        title="Enlarge"
+        :title="navToggle ? 'Close' : 'Open'"
         @click="toggleNavContent"
         class="enlargeBtn"
       ></base-button>

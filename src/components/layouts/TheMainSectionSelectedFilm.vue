@@ -1,5 +1,5 @@
 <template>
-  <div :style="containerDiv" class="containerDiv">
+  <div :style="containerDiv" class="containerDiv animation">
     <img :src="randomFilePath" />
 
     <div class="selectedFilmDivGrp" v-if="selectedFilmToggle && !modalDisplay">
@@ -131,6 +131,9 @@ export default {
 </script>
 
 <style>
+
+
+
 .selectedFilmDivGrp {
   color: white;
   background-color: rgba(0, 0, 0, 0.4);
