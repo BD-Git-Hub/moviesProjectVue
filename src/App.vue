@@ -32,13 +32,15 @@ const dataRetrieval = async (searchParams) => {
 const requestData = async (searchParams, userParams) => {
   const data = await searchData(APIURL + searchParams, userParams);
 
- 
-
   return data;
 };
 
-const findInfo = async (searchParams, userParams) => {
+const findInfo = async (searchParams, userParams, func) => {
   const data = await findData(APIURL + searchParams, userParams);
+
+  if (data.length === 0) {
+    func();
+  }
 
   return data;
 };
@@ -59,8 +61,12 @@ const convertDataToStoredData = (data, storedData) => {
 
     if (response[0]) {
       dataArr.push(response[0]);
+    } else if (!response[0]) {
+      return;
     } else if (response[0].results) {
       dataArr.push(response[0]);
+    } else {
+      return;
     }
 
     if (
@@ -219,10 +225,16 @@ export default {
       submitSectionDisplay: computed(() => this.submitSectionDisplay),
       searchSubmitted: this.searchSubmitted,
       selectedDataInfo: computed(() => this.selectedDataInfo),
+      errorModelDisplay: computed(() => this.errorModelDisplay),
     };
   },
   methods: {
-    
+    showError() {
+      this.errorModelDisplay = true;
+    },
+    notShowError() {
+      if (this.errorModelDisplay) this.errorModelDisplay = false;
+    },
     randomFilmNumber() {
       const randomNumber = Math.floor(Math.random() * 20);
       return randomNumber;
@@ -230,6 +242,7 @@ export default {
     searchSubmitted(selectedGenre, selectedRating, userInput) {
       this.clearSearchData();
       this.clearSelectedData();
+      this.notShowError();
 
       let searchData = [];
       const ratingNumber = selectedRating;
@@ -305,27 +318,23 @@ export default {
 
       this.toggleDisplays(sectionName);
 
-      const info = findInfo(partOneMovie, filmID);
+      const info = findInfo(partOneMovie, filmID, this.showError);
 
-      
       const selectedImageData = requestImagesAndCredits(
         partOneMovie,
         filmID,
         searchImages
-        );
-        
-        const selectedCreditsData = requestImagesAndCredits(
-          partOneMovie,
-          filmID,
-          searchCredits
-          );
+      );
 
-      
-          
-      
+      const selectedCreditsData = requestImagesAndCredits(
+        partOneMovie,
+        filmID,
+        searchCredits
+      );
+
+      convertDataToStoredData(info, this.selectedDataInfo);
       convertDataToStoredData(selectedImageData, this.selectedDataImage);
       convertDataToStoredData(selectedCreditsData, this.selectedDataCredits);
-      convertDataToStoredData(info, this.selectedDataInfo);
 
       this.selectedFilmName = filmName;
     },
@@ -344,6 +353,7 @@ export default {
       selectedFilmName: "",
       submitSectionDisplay: false,
       selectedFilmToggle: false,
+      errorModelDisplay: false,
     };
   },
 };

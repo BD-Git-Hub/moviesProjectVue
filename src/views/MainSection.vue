@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="mainSection">
-      <div v-if="submitSectionDisplay">
+      <div v-if="submitSectionDisplay && !errorModelDisplay">
         <the-main-section-items
           v-for="data in searchData"
           :key="data.id"
@@ -14,7 +14,14 @@
           @click="selectedFilmSubmitted(data.id, data.name, submitSection)"
         />
       </div>
-      <the-main-section-selected-film v-else-if="selectedFilmToggle"/>
+      <the-main-section-selected-film v-else-if="selectedFilmToggle && !errorModelDisplay"/>
+
+      <div v-else-if="errorModelDisplay">
+      <h1>Server error: No data found. Please choose another film.</h1>
+      </div>
+
+
+
       <div v-else>
         <h1><span class="spanOne">Film</span><span class="spanTwo">Flick</span></h1>
         <p>Search your favourite films</p>
@@ -50,7 +57,7 @@ import TheMainSectionItems from "@/components/layouts/TheMainSectionItems.vue";
 import TheMainSectionSelectedFilm from "@/components/layouts/TheMainSectionSelectedFilm.vue";
 
 export default {
-  inject: ["trendingDayData", "searchData", "submitSectionDisplay", "selectedFilmToggle", "selectedFilmSubmitted"],
+  inject: ["trendingDayData", "searchData", "submitSectionDisplay", "selectedFilmToggle", "selectedFilmSubmitted", "errorModelDisplay"],
   components: {
     TheTrailers,
     TheFooter,

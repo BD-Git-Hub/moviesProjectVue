@@ -11,16 +11,13 @@ export const getData = async (APIURL) => {
         return response.json();
       } else {
         throw new Error(`An Error has occurred ${response.status}`);
-
-        
       }
     })
     .then((data) => {
       movies.push(data);
     })
     .catch((error) => {
-      console.log(error + "AN ERROR HAS HAPPENED!");
-      return "AN ERROR HAS OCCURED!"
+      console.log(error);
     });
 
   return movies;
@@ -38,7 +35,6 @@ export const searchData = async (APIURL, userParams) => {
         return response.json();
       } else {
         throw new Error(`An Error has occurred ${response.status}`);
-
       }
     })
     .then((data) => {
@@ -46,7 +42,6 @@ export const searchData = async (APIURL, userParams) => {
     })
     .catch((error) => {
       console.log(error);
-
     });
 
   return movies;
@@ -63,7 +58,6 @@ export const findData = async (APIURL, userParams) => {
         return response.json();
       } else {
         throw new Error(`An Error has occurred ${response.status}`);
-
       }
     })
     .then((data) => {
@@ -71,7 +65,6 @@ export const findData = async (APIURL, userParams) => {
     })
     .catch((error) => {
       console.log(error);
-
     });
 
   return movies;
