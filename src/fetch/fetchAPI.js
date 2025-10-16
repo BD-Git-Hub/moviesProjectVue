@@ -1,4 +1,5 @@
-import { APIKey } from "./APIKeys";
+// Read API key from environment (set VUE_APP_API_KEY in your env/Vercel)
+const APIKey = process.env.VUE_APP_API_KEY;
 
 export const getData = async (APIURL) => {
   let movies = [];
